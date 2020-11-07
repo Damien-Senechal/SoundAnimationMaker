@@ -1,0 +1,14 @@
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\AudioPeak.exe.config
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\AudioPeak.exe
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\AudioPeak.pdb
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\NAudio.dll
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\ScottPlot.dll
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\bin\Debug\NAudio.xml
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.csprojAssemblyReference.cache
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.Form1.resources
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.Properties.Resources.resources
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.csproj.GenerateResource.cache
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.csproj.CoreCompileInputs.cache
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.csproj.CopyComplete
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.exe
+C:\Users\MISTER\Downloads\Csharp-Data-Visualization-master\Csharp-Data-Visualization-master\examples\2019-06-08-audio-fft\obj\Debug\AudioPeak.pdb
