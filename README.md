@@ -1,4 +1,4 @@
 # SoundAnimationMaker
 Page GitHub du projet de deuxième année SoundAnimationMaker
 
-# WESH LES SRAB
+# Bonjour à tous et bienvenue dans SoundAnimationMaker
