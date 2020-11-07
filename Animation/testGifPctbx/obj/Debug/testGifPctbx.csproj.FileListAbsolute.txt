@@ -1,0 +1,15 @@
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\testGifPctbx.exe.config
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\testGifPctbx.exe
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\testGifPctbx.pdb
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.csprojAssemblyReference.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.Form1.resources
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.Properties.Resources.resources
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.csproj.GenerateResource.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.csproj.CoreCompileInputs.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.exe
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.pdb
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\Magick.NET-Q16-AnyCPU.dll
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\Magick.NET.Core.dll
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\Magick.NET-Q16-AnyCPU.xml
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\bin\Debug\Magick.NET.Core.xml
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\codeTest\GTK\testGifPctbx\obj\Debug\testGifPctbx.csproj.CopyComplete
