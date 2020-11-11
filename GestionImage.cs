@@ -29,6 +29,13 @@ namespace SoundAnimationMaker
             }
         }
 
+        public void afficheImage(PictureBox pictureBox, String chemin, String nomImage) //fonction qui permet d'afficher l'image qui vient d'être modifiée
+        {
+            FileStream photoStream = File.OpenRead(chemin + nomImage);
+            pictureBox.Image = Image.FromStream(photoStream);
+            photoStream.Close();
+
+        }
 
         public void afficheImage(PictureBox pictureBox) //fonction qui permet d'afficher l'image qui vient d'être modifiée
         {
@@ -48,7 +55,7 @@ namespace SoundAnimationMaker
         public void ResetImage(PictureBox pictureBox)
         {
             compteur = 0;
-            afficheImage(pictureBox);
+            afficheImage(pictureBox, accesVersBD, "imageDepart");
 
             string[] fileList = Directory.GetFiles(accesVersTampon);
             foreach (string f in fileList)
@@ -62,7 +69,7 @@ namespace SoundAnimationMaker
             Images img = new Images(accesVersBD + imageDepart + ".png");
             img.effectuerTransformation(transformation);
             creeImage(img);
-            afficheImage(pictureBox);
+            afficheImage(pictureBox, accesVersBD, imageDepart);
         }
 
         public void modifierImage(PictureBox pictureBox, String transformation)

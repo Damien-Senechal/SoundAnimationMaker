@@ -24,7 +24,7 @@ namespace testGifPctbx
             this.WindowState = FormWindowState.Maximized;
             pictureBox1.Location = new Point(0, 0);
             button1.Location = new Point(Screen.PrimaryScreen.Bounds.Width-button1.Size.Width, Screen.PrimaryScreen.Bounds.Height-button1.Size.Height);
-            var image = new MagickImage("images/stormcloud.jpg");
+            var image = new MagickImage("images/fond.jpg");
             var size = new MagickGeometry(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             size.IgnoreAspectRatio = true;
 
@@ -60,13 +60,12 @@ namespace testGifPctbx
         int i = 1;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string str = "images/pluieMoyenneTest/pluiegalere" + i + ".png";
+            string str = "images/pluieMoyenne/pluieMoyenne" + i + ".png";
             FileStream photoStream = File.OpenRead(str);
             pictureBox1.Image = Image.FromStream(photoStream);
             photoStream.Close();
             i++;
-            i++;
-            if (i == 97)
+            if (i == 49)
             {
                 i = 1;
             }

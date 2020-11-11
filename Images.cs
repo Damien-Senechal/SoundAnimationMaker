@@ -42,6 +42,9 @@ namespace SoundAnimationMaker
                 case "flop":
                     this.flopImage();
                     break;
+                case "negate":
+                    this.NegateImage();
+                    break;
 
                 default:
                     break;
@@ -51,15 +54,20 @@ namespace SoundAnimationMaker
         public MagickImage flipImage()
         {
             this.image.Flip();
-
             return image;
         }
 
         public MagickImage flopImage()
         {
             this.image.Flop();
-
             return image;
         }
+
+        public MagickImage NegateImage()
+        {
+            this.image.Grayscale();
+            return image;
+        }
+
     }
 }
