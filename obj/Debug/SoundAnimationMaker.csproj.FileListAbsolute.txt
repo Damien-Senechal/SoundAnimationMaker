@@ -1,0 +1,14 @@
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\SoundAnimationMaker.exe.config
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\SoundAnimationMaker.exe
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\SoundAnimationMaker.pdb
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\Magick.NET-Q16-AnyCPU.dll
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\Magick.NET.Core.dll
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\Magick.NET-Q16-AnyCPU.xml
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\bin\Debug\Magick.NET.Core.xml
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.csprojAssemblyReference.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.Properties.Resources.resources
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.csproj.GenerateResource.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.csproj.CoreCompileInputs.cache
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.csproj.CopyComplete
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.exe
+E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.pdb
