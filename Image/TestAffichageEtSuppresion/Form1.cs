@@ -438,5 +438,22 @@ namespace TestAffichageEtSuppresion
             afficheImage(str);
         }
 
+        private void transparance_Click(object sender, EventArgs e)
+        {
+            String str = "imageDofins/dofin" + i + ".jpg";
+
+            var image = selectImage();
+
+            //changer les pixel d'une couleur donnée par une autre couleur donnée
+            image.Colorize(MagickColors.White, new Percentage(50));
+
+            //image.Colorize(new MagickColor(255, 255, 255), new Percentage(5));
+
+            image.Write(str);
+            label1.Text = "i =" + i;
+            i++;
+
+            afficheImage(str);
+        }
     }
 }

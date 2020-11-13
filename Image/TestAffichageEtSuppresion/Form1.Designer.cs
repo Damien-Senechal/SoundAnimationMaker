@@ -74,6 +74,7 @@
             this.button60 = new System.Windows.Forms.Button();
             this.button70 = new System.Windows.Forms.Button();
             this.button80 = new System.Windows.Forms.Button();
+            this.transparance = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -413,7 +414,6 @@
             this.Modulate.Text = "Modulate";
             this.Modulate.UseVisualStyleBackColor = false;
             this.Modulate.Click += new System.EventHandler(this.Modulate_Click);
-
             // 
             // flipButton
             // 
@@ -494,13 +494,24 @@
             this.button80.Text = "Opaque";
             this.button80.UseVisualStyleBackColor = true;
             this.button80.Click += new System.EventHandler(this.opaque_Click);
-
+            // 
+            // transparance
+            // 
+            this.transparance.Location = new System.Drawing.Point(1000, 453);
+            this.transparance.Name = "transparance";
+            this.transparance.Size = new System.Drawing.Size(94, 30);
+            this.transparance.TabIndex = 35;
+            this.transparance.Text = "transparance";
+            this.transparance.UseVisualStyleBackColor = true;
+            this.transparance.Click += new System.EventHandler(this.transparance_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1160, 566);
+            this.Controls.Add(this.transparance);
             this.Controls.Add(this.Modulate);
             this.Controls.Add(this.degreeRotate);
             this.Controls.Add(this.STOP);
@@ -608,6 +619,7 @@
         private System.Windows.Forms.Button button60;
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button80;
+        private System.Windows.Forms.Button transparance;
     }
 }
 
