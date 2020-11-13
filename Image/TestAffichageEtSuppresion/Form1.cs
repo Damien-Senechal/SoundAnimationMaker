@@ -464,7 +464,9 @@ namespace TestAffichageEtSuppresion
 
             //image.CycleColormap(Convert.ToInt32(textBox2.Text));
             //image.Composite(image2, CompositeOperator.Luminize);
-            image.Composite(image2, CompositeOperator.CopyGreen);
+
+            //image.Composite(image2, (Channels) 1.5);
+
 
             image.Write(str);
             label1.Text = "i =" + i;
