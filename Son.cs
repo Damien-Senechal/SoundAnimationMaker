@@ -12,25 +12,11 @@ using System.Windows.Forms;
 
 namespace SoundAnimationMaker
 {
-    class Son
+    class Son 
     {
-        /*ScanSoundCards();
-        PlotInitialize();*/
-
-
-        public static void ScanSoundCards(ComboBox cbDevice)
-        {
-            cbDevice.Items.Clear();
-            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
-                cbDevice.Items.Add(NAudio.Wave.WaveIn.GetCapabilities(i).ProductName);
-            if (cbDevice.Items.Count > 0)
-                cbDevice.SelectedIndex = 0;
-            else
-                MessageBox.Show("ERROR: no recording devices available");
-        }
-
-
         public static NAudio.Wave.WaveInEvent wvin;
+        public static Int16[] dataPcm;
+        public static double[] dataFft;
         public static void AudioMonitorInitialize(
                 int DeviceIndex, int sampleRate = 32_000,
                 int bitRate = 16, int channels = 1,
@@ -49,7 +35,18 @@ namespace SoundAnimationMaker
             }
         }
 
-        public static Int16[] dataPcm;
+        
+        public static void ScanSoundCards(ComboBox combox)
+        {
+            combox.Items.Clear();
+            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+                combox.Items.Add(NAudio.Wave.WaveIn.GetCapabilities(i).ProductName);
+            if (combox.Items.Count > 0)
+                combox.SelectedIndex = 0;
+            else
+                MessageBox.Show("ERROR: pas de périphérique détecté");
+        }
+        
         public static void OnDataAvailable(object sender, NAudio.Wave.WaveInEventArgs args)
         {
             int bytesPerSample = wvin.WaveFormat.BitsPerSample / 8;
@@ -60,9 +57,8 @@ namespace SoundAnimationMaker
             {
                 dataPcm[i] = BitConverter.ToInt16(args.Buffer, i * bytesPerSample);
             }
-        }
 
-        public static double[] dataFft;
+        }
 
         public static void updateFFT()
         {
@@ -91,15 +87,6 @@ namespace SoundAnimationMaker
         public static double getPuissance(int x)
         {
             return dataFft[x-1];
-        }
-
-        private void BtnStop_Click(object sender, EventArgs e)
-        {
-            if (wvin != null)
-            {
-                wvin.StopRecording();
-                wvin = null;
-            }
         }
 
     }
