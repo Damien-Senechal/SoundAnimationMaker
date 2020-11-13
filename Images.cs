@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace SoundAnimationMaker
 {
@@ -25,6 +26,24 @@ namespace SoundAnimationMaker
             this.height = image.Height;
             this.width = image.Width;
 
+        }
+
+        public void RedimensionnerImage()
+        {
+            var image = new MagickImage("images/stormCloud.jpg");
+            var size = new MagickGeometry(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            size.IgnoreAspectRatio = true;
+
+            image.Resize(size);
+        }
+
+        public void RedimensionnerImage(int largeur, int hauteur)
+        {
+            var image = new MagickImage("images/stormCloud.jpg");
+            var size = new MagickGeometry(largeur, hauteur);
+            size.IgnoreAspectRatio = true;
+
+            image.Resize(size);
         }
 
         public MagickImage getImage()

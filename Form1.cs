@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace SoundAnimationMaker
 {
     public partial class Form1 : Form
@@ -22,11 +23,7 @@ namespace SoundAnimationMaker
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Son.dataPcm == null)
-                return;
-
-            Son.updateFFT();
-            label1.Text = "" + Son.getPuissance(64);
+            Son.UpdatePuissance(label1);
         }
 
         private void button1_Click(object sender, EventArgs e)

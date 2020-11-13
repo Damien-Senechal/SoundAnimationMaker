@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SoundAnimationMaker
 {
-    class Son 
+    static class Son 
     {
         public static NAudio.Wave.WaveInEvent wvin;
         public static Int16[] dataPcm;
@@ -82,6 +82,15 @@ namespace SoundAnimationMaker
                 double fftRight = Math.Abs(fftFull[fftPoints - i - 1].X + fftFull[fftPoints - i - 1].Y);
                 dataFft[i] = fftLeft + fftRight;
             }
+        }
+
+        public static void UpdatePuissance(Label label)
+        {
+            if (Son.dataPcm == null)
+                return;
+
+            Son.updateFFT();
+            label.Text = "" + Son.getPuissance(64);
         }
 
         public static double getPuissance(int x)
