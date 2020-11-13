@@ -88,5 +88,11 @@ namespace SoundAnimationMaker
             return image;
         }
 
+        public MagickImage DifferenceImage(MagickImage image2)
+        {
+            this.image.Composite(image2, CompositeOperator.Difference);
+            return image;
+        }
+
     }
 }

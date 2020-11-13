@@ -75,6 +75,8 @@
             this.button70 = new System.Windows.Forms.Button();
             this.button80 = new System.Windows.Forms.Button();
             this.transparance = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -505,12 +507,30 @@
             this.transparance.UseVisualStyleBackColor = true;
             this.transparance.Click += new System.EventHandler(this.transparance_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(894, 459);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 36;
+            this.textBox2.Text = "-";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(886, 497);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(219, 21);
+            this.comboBox1.TabIndex = 37;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1160, 566);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.transparance);
             this.Controls.Add(this.Modulate);
             this.Controls.Add(this.degreeRotate);
@@ -620,6 +640,8 @@
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button80;
         private System.Windows.Forms.Button transparance;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

@@ -32,6 +32,12 @@ namespace TestAffichageEtSuppresion
                 }
             }
 
+            string[] picList2 = Directory.GetFiles("imageTest", "*");
+            foreach (string f in picList2)
+            {
+                comboBox1.Items.Add(f);
+            }
+
         }
 
         int i = 1;
@@ -438,16 +444,27 @@ namespace TestAffichageEtSuppresion
             afficheImage(str);
         }
 
+        public void RedimensionnerImage(MagickImage image, int largeur, int hauteur)
+        {
+            var size = new MagickGeometry(largeur, hauteur);
+            size.IgnoreAspectRatio = true;
+
+            image.Resize(size);
+        }
+
         private void transparance_Click(object sender, EventArgs e)
         {
             String str = "imageDofins/dofin" + i + ".jpg";
 
             var image = selectImage();
 
-            //changer les pixel d'une couleur donnée par une autre couleur donnée
-            image.Colorize(MagickColors.White, new Percentage(50));
+            var image2 = new MagickImage(comboBox1.Text);
+            RedimensionnerImage(image2, image.Width, image.Height);
 
-            //image.Colorize(new MagickColor(255, 255, 255), new Percentage(5));
+
+            //image.CycleColormap(Convert.ToInt32(textBox2.Text));
+            //image.Composite(image2, CompositeOperator.Luminize);
+            image.Composite(image2, CompositeOperator.CopyGreen);
 
             image.Write(str);
             label1.Text = "i =" + i;
