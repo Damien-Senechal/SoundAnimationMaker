@@ -8,5 +8,6 @@ namespace SoundAnimationMaker
 {
     class Animation
     {
+
     }
 }
