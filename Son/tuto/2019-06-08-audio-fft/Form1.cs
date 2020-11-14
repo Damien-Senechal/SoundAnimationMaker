@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +16,7 @@ namespace AudioPeak
         {
             InitializeComponent();
             ScanSoundCards();
+            PlotInitialize();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,7 +33,19 @@ namespace AudioPeak
             else
                 MessageBox.Show("ERROR: no recording devices available");
         }
-
+        private void PlotInitialize()
+        {
+            if (dataFft != null)
+            {
+                scottPlotUC1.plt.Clear();
+                double fftSpacing = (double)wvin.WaveFormat.SampleRate / dataFft.Length;
+                scottPlotUC1.plt.PlotSignal(dataFft, sampleRate: fftSpacing, markerSize: 0);
+                scottPlotUC1.plt.PlotHLine(0, color: Color.Black, lineWidth: 1);
+                scottPlotUC1.plt.YLabel("Power");
+                scottPlotUC1.plt.XLabel("Frequency (kHz)");
+                scottPlotUC1.Render();
+            }
+        } 
 
         private NAudio.Wave.WaveInEvent wvin;
         private void AudioMonitorInitialize(
@@ -62,10 +74,7 @@ namespace AudioPeak
             if (dataPcm == null)
                 dataPcm = new Int16[samplesRecorded];
             for (int i = 0; i < samplesRecorded; i++)
-            {
                 dataPcm[i] = BitConverter.ToInt16(args.Buffer, i * bytesPerSample);
-            }
-
         }
 
         double[] dataFft;
@@ -80,17 +89,12 @@ namespace AudioPeak
             // apply a Hamming window function as we load the FFT array then calculate the FFT
             NAudio.Dsp.Complex[] fftFull = new NAudio.Dsp.Complex[fftPoints];
             for (int i = 0; i < fftPoints; i++)
-            {
                 fftFull[i].X = (float)(dataPcm[i] * NAudio.Dsp.FastFourierTransform.HammingWindow(i, fftPoints));
-                label2.Text = "" + (float)(dataPcm[99] * NAudio.Dsp.FastFourierTransform.HammingWindow(i, fftPoints));
-            }
             NAudio.Dsp.FastFourierTransform.FFT(true, (int)Math.Log(fftPoints, 2.0), fftFull);
 
             // copy the complex values into the double array that will be plotted
             if (dataFft == null)
-            {
                 dataFft = new double[fftPoints / 2];
-            }
             for (int i = 0; i < fftPoints / 2; i++)
             {
                 double fftLeft = Math.Abs(fftFull[i].X + fftFull[i].Y);
@@ -113,21 +117,22 @@ namespace AudioPeak
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             if (dataPcm == null)
                 return;
+
             updateFFT();
-        }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
+            if (scottPlotUC1.plt.GetPlottables().Count == 0)
+                PlotInitialize();
 
+            if (cbAutoAxis.Checked)
+            {
+                scottPlotUC1.plt.AxisAuto();
+                scottPlotUC1.plt.TightenLayout();
+            }
+            scottPlotUC1.Render();
         }
     }
 }

@@ -70,29 +70,45 @@ namespace SoundAnimationMaker
             }
         }
 
-        public MagickImage flipImage()
+        public void flipImage()
         {
             this.image.Flip();
-            return image;
         }
 
-        public MagickImage flopImage()
+        public void flopImage()
         {
             this.image.Flop();
-            return image;
         }
 
-        public MagickImage NegateImage()
+        public void NegateImage()
         {
             this.image.Grayscale();
-            return image;
         }
 
-        public MagickImage DifferenceImage(MagickImage image2)
+        public void DifferenceImage(MagickImage image2)
         {
             this.image.Composite(image2, CompositeOperator.Difference);
-            return image;
         }
+
+        public void changerLuminasiteImage(int pourcentageLuminosite)
+        {
+            this.image.BrightnessContrast(new Percentage(pourcentageLuminosite), new Percentage(0));
+        }
+
+        public void changerContrasteImage(int pourcentageContraste)
+        {
+            this.image.BrightnessContrast(new Percentage(0), new Percentage(pourcentageContraste));
+        }
+
+        public void transitionEntreImage(MagickImage image2)
+        {
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            collection.Add(image2);
+            collection.Morph(20);
+        }
+
+
 
     }
 }

@@ -458,12 +458,29 @@ namespace TestAffichageEtSuppresion
 
             var image = selectImage();
 
-            var image2 = new MagickImage(comboBox1.Text);
-            RedimensionnerImage(image2, image.Width, image.Height);
+            //var image2 = new MagickImage(comboBox1.Text);
+            //RedimensionnerImage(image2, image.Width, image.Height);
+
+            //image.BrightnessContrast(new Percentage(Convert.ToInt32(textBox2.Text)), new Percentage(Convert.ToInt32(textBox3.Text)));
 
 
             //image.CycleColormap(Convert.ToInt32(textBox2.Text));
+
             //image.Composite(image2, CompositeOperator.Luminize);
+
+            /*
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            string[] picList2 = Directory.GetFiles("imageTest", "*");
+            foreach (string f in picList2)
+            {
+                collection.Add(f);
+            }
+            //collection.Add(image2);
+            //collection.Morph(Convert.ToInt32(textBox2.Text));
+            */
+            double[] myIntArray = { 5, 6, 7, 8, 9 };
+            image.Evaluate(Channels.Alpha, EvaluateFunction.Polynomial, myIntArray);
 
             //image.Composite(image2, (Channels) 1.5);
 
@@ -472,7 +489,7 @@ namespace TestAffichageEtSuppresion
             label1.Text = "i =" + i;
             i++;
 
-            afficheImage(str);
+            //afficheImage(str);
         }
     }
 }
