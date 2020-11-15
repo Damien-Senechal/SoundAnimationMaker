@@ -479,8 +479,22 @@ namespace TestAffichageEtSuppresion
             //collection.Add(image2);
             //collection.Morph(Convert.ToInt32(textBox2.Text));
             */
-            double[] myIntArray = { 5, 6, 7, 8, 9 };
-            image.Evaluate(Channels.Alpha, EvaluateFunction.Polynomial, myIntArray);
+            image.Distort(DistortMethod.BilinearReverse, new double[] { Convert.ToInt32(textBox4.Text), 
+                Convert.ToInt32(textBox5.Text), 
+                Convert.ToInt32(textBox6.Text), 
+                Convert.ToInt32(textBox7.Text), 
+                Convert.ToInt32(textBox8.Text), 
+                Convert.ToInt32(textBox9.Text), 
+                Convert.ToInt32(textBox10.Text),
+                Convert.ToInt32(textBox11.Text), 
+                Convert.ToInt32(textBox12.Text), 
+                Convert.ToInt32(textBox13.Text), 
+                Convert.ToInt32(textBox14.Text), 
+                Convert.ToInt32(textBox15.Text),
+                Convert.ToInt32(textBox16.Text),
+                Convert.ToInt32(textBox17.Text),
+                Convert.ToInt32(textBox18.Text),
+                Convert.ToInt32(textBox19.Text)});
 
             //image.Composite(image2, (Channels) 1.5);
 
@@ -489,7 +503,7 @@ namespace TestAffichageEtSuppresion
             label1.Text = "i =" + i;
             i++;
 
-            //afficheImage(str);
+            afficheImage(str);
         }
     }
 }
