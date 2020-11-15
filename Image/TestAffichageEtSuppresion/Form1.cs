@@ -391,17 +391,19 @@ namespace TestAffichageEtSuppresion
                 System.Threading.Thread.Sleep(1000);
             }
         }
-
+        private int ssketuveu = 1;
         private void timer1_Tick(object sender, EventArgs e)
         {
             String str = "imageDofins/dofin" + i + ".jpg";
 
             var image = selectImage();
 
-            if (Convert.ToInt32(degreeRotate.Text) > 0)
+            /*if (Convert.ToInt32(degreeRotate.Text) > 0)
             {
                 image.Distort(DistortMethod.ScaleRotateTranslate, Convert.ToInt32(degreeRotate.Text));
-            }
+            }*/
+            image.Distort(DistortMethod.Arc, ssketuveu);
+            ssketuveu++;
             image.Write(str);
 
             label1.Text = "i =" + i;
@@ -504,6 +506,22 @@ namespace TestAffichageEtSuppresion
             i++;
 
             afficheImage(str);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String str = "imageDofins/dofin" + i + ".jpg";
+
+            var image = selectImage();
+
+            image.Distort(DistortMethod.Barrel, new double[] { 0.10, 50, 0.75, 0.60, 0.90, 0, 0.70, 0.63 });
+            image.Write(str);
+            afficheImage(str);
+
+            label1.Text = "i =" + i;
+            i++;
+
+
         }
     }
 }

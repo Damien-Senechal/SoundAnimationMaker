@@ -95,6 +95,7 @@
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -686,12 +687,23 @@
             this.textBox19.TabIndex = 52;
             this.textBox19.Text = "65";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1109, 17);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(259, 394);
+            this.button3.TabIndex = 56;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1380, 566);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.textBox17);
             this.Controls.Add(this.textBox18);
@@ -841,6 +853,7 @@
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.TextBox textBox19;
+        private System.Windows.Forms.Button button3;
     }
 }
 
