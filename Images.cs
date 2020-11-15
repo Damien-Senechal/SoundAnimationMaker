@@ -62,7 +62,10 @@ namespace SoundAnimationMaker
                     this.flopImage();
                     break;
                 case "negate":
-                    this.NegateImage();
+                    this.negateImage();
+                    break;
+                case "gris":
+                    this.mettreEnGris();
                     break;
 
                 default:
@@ -80,12 +83,17 @@ namespace SoundAnimationMaker
             this.image.Flop();
         }
 
-        public void NegateImage()
+        public void negateImage()
+        {
+            this.image.Negate();
+        }
+
+        public void mettreEnGris()
         {
             this.image.Grayscale();
         }
 
-        public void DifferenceImage(MagickImage image2)
+        public void differenceImage(MagickImage image2)
         {
             this.image.Composite(image2, CompositeOperator.Difference);
         }
@@ -106,6 +114,39 @@ namespace SoundAnimationMaker
             collection.Add(image);
             collection.Add(image2);
             collection.Morph(20);
+        }
+
+        public void transitionEntreImage(MagickImage image2, int nbimage)
+        {
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            collection.Add(image2);
+            collection.Morph(nbimage);
+        }
+
+        public void changerCouleur(MagickColor couleurDepart, MagickColor couleurArrivee)
+        {
+            this.image.Opaque(couleurDepart, couleurArrivee);
+        }
+
+        public void faireArc(int pourcentageArc)
+        {
+            this.image.Distort(DistortMethod.Arc, pourcentageArc);
+        }
+
+        public void tourneImage(int pourcentage)
+        {
+            this.image.Distort(DistortMethod.ScaleRotateTranslate, pourcentage);
+        }
+
+        public void repasseContour(int niveauDeRepassage)
+        {
+            this.image.Edge(niveauDeRepassage);
+        }
+
+        public void recupererPartieImage(int witdh, int height)
+        {
+            image.Extent(witdh, height);
         }
 
 
