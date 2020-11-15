@@ -60,12 +60,12 @@ namespace testGifPctbx
         int i = 1;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string str = "images/nouvellePluie/Npluie-" + i + ".png";
+            string str = "images/pluieMoyenne/pluieMoyenne-" + i + ".png";
             FileStream photoStream = File.OpenRead(str);
             pictureBox1.Image = Image.FromStream(photoStream);
             photoStream.Close();
-            i = i+2;
-            if (i == 61)
+            i++;
+            if (i == 60)
             {
                 i = 1;
             }
