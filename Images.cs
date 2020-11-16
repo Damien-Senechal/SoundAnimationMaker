@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SoundAnimationMaker
 {
@@ -28,9 +29,13 @@ namespace SoundAnimationMaker
 
         }
 
+        public MagickImage getImage()
+        {
+            return this.image;
+        }
+
         public void RedimensionnerImage()
         {
-            var image = new MagickImage("images/stormCloud.jpg");
             var size = new MagickGeometry(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             size.IgnoreAspectRatio = true;
 
@@ -39,16 +44,10 @@ namespace SoundAnimationMaker
 
         public void RedimensionnerImage(int largeur, int hauteur)
         {
-            var image = new MagickImage("images/stormCloud.jpg");
             var size = new MagickGeometry(largeur, hauteur);
             size.IgnoreAspectRatio = true;
 
             image.Resize(size);
-        }
-
-        public MagickImage getImage()
-        {
-            return this.image;
         }
 
         public void effectuerTransformation(String transformation)
@@ -72,6 +71,50 @@ namespace SoundAnimationMaker
                     break;
             }
         }
+
+        public void effectuerTransformation(String transformation, MagickImage deuxiemeImage)
+        {
+            if (transformation == "defere") 
+            differenceImage(deuxiemeImage);
+        }
+
+        public void effectuerTransformation(String transformation, int pourcentage)
+        {
+            switch (transformation)
+            {
+                case "lumino":
+                    this.changerLuminasiteImage(pourcentage);
+                    break;
+                case "contrast":
+                    this.changerContrasteImage(pourcentage); 
+                    break;
+                case "arc":
+                    this.faireArc(pourcentage);
+                    break;
+                case "rotate":
+                    this.rotateImage(pourcentage);
+                    break;
+                case "edge":
+                    this.repasseContour(pourcentage);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public void effectuerTransformation(String transformation, MagickColor coul1, MagickColor coul2)
+        {
+            if (transformation == "coul")
+                changerCouleur(coul1, coul2);
+        }
+
+        public void effectuerTransformation(String transformation, int witdh, int height)
+        {
+            if (transformation == "cut")
+                recupererPartieImage(witdh, height);
+        }
+
 
         public void flipImage()
         {
@@ -108,35 +151,14 @@ namespace SoundAnimationMaker
             this.image.BrightnessContrast(new Percentage(0), new Percentage(pourcentageContraste));
         }
 
-        public void transitionEntreImage(MagickImage image2)
-        {
-            MagickImageCollection collection = new MagickImageCollection();
-            collection.Add(image);
-            collection.Add(image2);
-            collection.Morph(20);
-        }
-
-        public void transitionEntreImage(MagickImage image2, int nbimage)
-        {
-            MagickImageCollection collection = new MagickImageCollection();
-            collection.Add(image);
-            collection.Add(image2);
-            collection.Morph(nbimage);
-        }
-
-        public void changerCouleur(MagickColor couleurDepart, MagickColor couleurArrivee)
-        {
-            this.image.Opaque(couleurDepart, couleurArrivee);
-        }
-
         public void faireArc(int pourcentageArc)
         {
             this.image.Distort(DistortMethod.Arc, pourcentageArc);
         }
 
-        public void tourneImage(int pourcentage)
+        public void rotateImage(int pourcentageTournage)
         {
-            this.image.Distort(DistortMethod.ScaleRotateTranslate, pourcentage);
+            this.image.Distort(DistortMethod.ScaleRotateTranslate, pourcentageTournage);
         }
 
         public void repasseContour(int niveauDeRepassage)
@@ -144,9 +166,31 @@ namespace SoundAnimationMaker
             this.image.Edge(niveauDeRepassage);
         }
 
+        public void changerCouleur(MagickColor couleurDepart, MagickColor couleurArrivee)
+        {
+            this.image.Opaque(couleurDepart, couleurArrivee);
+        }
+
         public void recupererPartieImage(int witdh, int height)
         {
             image.Extent(witdh, height);
+        }
+
+
+        public void transitionEntreImage(Images image2)
+        {
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            collection.Add(image2.image);
+            collection.Morph(20);
+        }
+
+        public void transitionEntreImage(Images image2, int nbimage)
+        {
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            collection.Add(image2.image);
+            collection.Morph(nbimage);
         }
 
 
