@@ -460,8 +460,8 @@ namespace TestAffichageEtSuppresion
 
             var image = selectImage();
 
-            //var image2 = new MagickImage(comboBox1.Text);
-            //RedimensionnerImage(image2, image.Width, image.Height);
+            var image2 = new MagickImage(comboBox1.Text);
+            RedimensionnerImage(image2, image.Width, image.Height);
 
             //image.BrightnessContrast(new Percentage(Convert.ToInt32(textBox2.Text)), new Percentage(Convert.ToInt32(textBox3.Text)));
 
@@ -480,7 +480,7 @@ namespace TestAffichageEtSuppresion
             }
             //collection.Add(image2);
             //collection.Morph(Convert.ToInt32(textBox2.Text));
-            */
+            
             image.Distort(DistortMethod.BilinearReverse, new double[] { Convert.ToInt32(textBox4.Text), 
                 Convert.ToInt32(textBox5.Text), 
                 Convert.ToInt32(textBox6.Text), 
@@ -499,13 +499,19 @@ namespace TestAffichageEtSuppresion
                 Convert.ToInt32(textBox19.Text)});
 
             //image.Composite(image2, (Channels) 1.5);
+            */
 
+            MagickImageCollection collection = new MagickImageCollection();
+            collection.Add(image);
+            collection.Add(image2);
+            collection.Morph(2);
 
-            image.Write(str);
+            collection.Write(str);
             label1.Text = "i =" + i;
             i++;
+            File.Move("imageDofins/dofin1-3.jpg", "wéwé.jpg");
 
-            afficheImage(str);
+            //afficheImage(str);
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Threading;
 
 namespace SoundAnimationMaker
 {
@@ -25,9 +26,11 @@ namespace SoundAnimationMaker
 
         public void supprimeVieilleImage() //permet de supprimer les images tampon et éviter de prendre trop de place en mémoire
         {
-            if (compteur > 3)
+            string[] fileList = Directory.GetFiles(accesVersTampon);
+            foreach (string f in fileList)
             {
-                File.Delete(accesVersTampon + "imageModifiee" + (compteur - 3) + ".png");
+                if (f != accesVersTampon + "imageModifiee" + (compteur - 1) + ".png")
+                File.Delete(f);
             }
         }
 
@@ -119,8 +122,38 @@ namespace SoundAnimationMaker
         {
             Images img = new Images(accesVersTampon + "imageModifiee" + compteur + ".png");
             Images img2 = new Images(accesVersBD + nomImage + ".png");
-
+            MagickImageCollection collection = img.transitionEntreImage(img2);
+            collection.Write(accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
+            int i = 0;
+            foreach (MagickImage image in collection)
+            {
+                afficheImage(accesVersTampon, "-" + i + ".jpg");
+                Thread.Sleep(5);
+                i++;
+            }
+            File.Move(accesVersTampon + "-" + (i - 1)+ ".jpg", accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
+            compteur++;
         }
+
+        public void transitionEntreImage(String nomImage, int nbImageTransition)
+        {
+            Images img = new Images(accesVersTampon + "imageModifiee" + compteur + ".png");
+            Images img2 = new Images(accesVersBD + nomImage + ".png");
+            MagickImageCollection collection = img.transitionEntreImage(img2, nbImageTransition);
+            collection.Write(accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
+            int i = 0;
+            foreach (MagickImage image in collection)
+            {
+                afficheImage(accesVersTampon, "-" + i + ".jpg");
+                Thread.Sleep(5);
+                i++;
+            }
+            File.Move(accesVersTampon + "-" + (i - 1) + ".jpg", accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
+            compteur++;
+        }
+
+
+
 
     }
 }

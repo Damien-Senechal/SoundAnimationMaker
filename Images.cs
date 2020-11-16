@@ -177,20 +177,22 @@ namespace SoundAnimationMaker
         }
 
 
-        public void transitionEntreImage(Images image2)
+        public MagickImageCollection transitionEntreImage(Images image2)
         {
             MagickImageCollection collection = new MagickImageCollection();
             collection.Add(image);
             collection.Add(image2.image);
             collection.Morph(20);
+            return collection;
         }
 
-        public void transitionEntreImage(Images image2, int nbimage)
+        public MagickImageCollection transitionEntreImage(Images image2, int nbimage)
         {
             MagickImageCollection collection = new MagickImageCollection();
             collection.Add(image);
             collection.Add(image2.image);
             collection.Morph(nbimage);
+            return collection;
         }
 
 
