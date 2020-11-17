@@ -84,13 +84,12 @@ namespace SoundAnimationMaker
             }
         }
 
-        public static void UpdatePuissance(Label label)
+        public static void UpdatePuissance()
         {
             if (Son.dataPcm == null)
                 return;
 
             Son.updateFFT();
-            label.Text = "" + Son.getPuissance(64);
         }
 
         public static double getPuissance(int x)

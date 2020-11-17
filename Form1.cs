@@ -16,19 +16,19 @@ namespace SoundAnimationMaker
         public Form1()
         {
             InitializeComponent();
-            Son.ScanSoundCards(comboBox1);
+            //Son.ScanSoundCards(comboBox1);
         }
 
 
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Son_Tick(object sender, EventArgs e)
         {
-            Son.UpdatePuissance(label1);
+            Son.UpdatePuissance();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Son.AudioMonitorInitialize(comboBox1.SelectedIndex);
+            //Son.AudioMonitorInitialize(comboBox1.SelectedIndex);
         }
 
         private void button2_Click(object sender, EventArgs e)
