@@ -92,9 +92,9 @@ namespace SoundAnimationMaker
             Son.updateFFT();
         }
 
-        public static double getPuissance(int x)
+        public static double getPuissance(int frequence)
         {
-            return dataFft[x-1];
+            return dataFft[frequence - 1];
         }
 
     }
