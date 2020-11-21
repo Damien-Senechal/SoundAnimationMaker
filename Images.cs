@@ -66,6 +66,12 @@ namespace SoundAnimationMaker
                 case "gris":
                     this.mettreEnGris();
                     break;
+                case "flou":
+                    this.flou();
+                    break;
+                case "polar":
+                    this.polar();
+                    break;
 
                 default:
                     break;
@@ -134,6 +140,16 @@ namespace SoundAnimationMaker
         public void mettreEnGris()
         {
             this.image.Grayscale();
+        }
+
+        public void flou()
+        {
+            this.image.Blur();
+        }
+
+        public void polar()
+        {
+            this.image.Distort(DistortMethod.Polar, 0);
         }
 
         public void differenceImage(MagickImage image2)
