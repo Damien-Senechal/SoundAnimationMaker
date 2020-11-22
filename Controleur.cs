@@ -27,7 +27,7 @@ namespace SoundAnimationMaker
         public static double moyennePuissance = 0;
         public static ArrayList listPuiss = new ArrayList();
 
-        public static void GererImage(TextBox textBox, Label label1, Label label24, Label label2, Label label3)
+        public static void GererImage(GestionImage outilsImage)
         {
 
             int puissanceLimite = (int)moyennePuissance;
@@ -57,6 +57,7 @@ namespace SoundAnimationMaker
                 }
             }
 
+            /*
             label24.Text = "Puissance Moyenne : " + moyennePuissance;
             if (moyenBass10_40 > puissanceMax)
             {
@@ -74,6 +75,7 @@ namespace SoundAnimationMaker
                 compteur1++;
                 moyenBass10_40 = 0;
             }
+            */
         }
     }
 }
