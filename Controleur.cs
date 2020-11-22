@@ -33,11 +33,11 @@ namespace SoundAnimationMaker
             int puissanceLimite = (int)moyennePuissance;
 
             //1
-            for (int i = 10; i <= 40; i++)
+            for (int i = 1; i <= 101; i++)
             {
                 moyenBass10_40 += Son.getPuissance(i);
             }
-            moyenBass10_40 = moyenBass10_40 / 30;
+            moyenBass10_40 /= 200;
 
             listPuiss.Add(moyenBass10_40);
             foreach (double puiss in listPuiss)
@@ -47,6 +47,8 @@ namespace SoundAnimationMaker
             moyennePuissance /= listPuiss.Count;
             if (moyennePuissance < 10)
                 moyennePuissance = 10;
+
+            
             if (listPuiss.Count > 100)
             {
                 for (int i = 0; i < listPuiss.Count; i++)
@@ -64,9 +66,9 @@ namespace SoundAnimationMaker
 
             label2.Text = "Moyenne frequence 10 / 40 : " + (int)moyenBass10_40;
 
-            int diff = (int)(moyennePuissance / moyenBass10_40) * 100;
+            //int diff = (int)(moyennePuissance / moyenBass10_40) * 100;
 
-            if (moyenBass10_40 < diff / moyenBass10_40)
+            if (moyenBass10_40 > moyennePuissance * 1.4)
             {
                 label3.Text = "Nb basse :" + compteur1;
                 compteur1++;
