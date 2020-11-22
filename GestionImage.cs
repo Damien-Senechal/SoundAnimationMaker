@@ -152,7 +152,34 @@ namespace SoundAnimationMaker
             compteur++;
         }
 
+        private void trambler()
+        {
+            Random randNum = new Random();
+            int X = randNum.Next(16);
+            int Xdf = randNum.Next(8);
+            int Y = randNum.Next(3);
 
+            pictureBox.Location = new Point(pictureBox.Location.X - Xdf, pictureBox.Location.Y - Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
+            System.Threading.Thread.Sleep(10);
+            pictureBox.Location = new Point(pictureBox.Location.X + Xdf, pictureBox.Location.Y + Y);
+            System.Threading.Thread.Sleep(10);
+        }
 
 
     }

@@ -1,0 +1,34 @@
+Musique :
+Basses : tourne (doucement) /
+
+
+
+
+transformation :
+-flip = 
+-flop =
+-negate =
+-mettreEnGris
+-difference entre deux images
+-changerLuminosite
+-changerContraste
+-faire Arc
+-rotate(degree)
+-repasserContour
+-changerUneCouleurEnUneAutreCouleur
+-recupererPartieDuneImage
+-bouger image (h, b, g, d)
+--flou
+--changerCouleurImage(filtre)
+
+Animation :
++pluie (moyenne, faible)
++neige
++feu
++explosion
++eclair
+
+
+
+*transitionEntreDeuxImages
+**effet de tranblement
