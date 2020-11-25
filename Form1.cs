@@ -7,7 +7,7 @@ namespace SoundAnimationMaker
 {
     public partial class Form1 : Form
     {
-        Image bgImg = Image.FromFile("Ressources/fondForm.png");
+        Image bgImg = Image.FromFile("Ressources/testFond.png");
 
         Image parametrePushed = Image.FromFile("Ressources/parametrePushed.png");
         Image parametre = Image.FromFile("Ressources/parametre.png");
@@ -28,8 +28,6 @@ namespace SoundAnimationMaker
             Size = new Size(Screen.PrimaryScreen.Bounds.Width/2, Screen.PrimaryScreen.Bounds.Height/2);
             BackgroundImage = bgImg;
         }
-
-        
 
 
         private void timer_Son_Tick(object sender, EventArgs e)
@@ -119,18 +117,9 @@ namespace SoundAnimationMaker
 
         private void buttonLancer_Click(object sender, EventArgs e)
         {
-            buttonParametre.Visible = false;
-            buttonParametre.Visible = false;
-            buttonParcourir.Visible = false;
-            combox.Visible = false;
-            pictureBox1.Visible = false;
-            buttonLancer.Visible = false;
-            logo.Visible = false;
-            nom.Visible = false;
-            this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            buttonClose.Location = new Point(Screen.PrimaryScreen.Bounds.Width-130, Screen.PrimaryScreen.Bounds.Height-30);
+            Form2 form2 = new Form2(this);
+            form2.Show();
+            this.Hide();
         }
     }
 }

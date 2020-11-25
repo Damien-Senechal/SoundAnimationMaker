@@ -43,6 +43,7 @@ namespace SoundAnimationMaker
             this.logo = new System.Windows.Forms.PictureBox();
             this.nom = new System.Windows.Forms.PictureBox();
             this.buttonLancer = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonParametre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonParcourir)).BeginInit();
@@ -62,9 +63,9 @@ namespace SoundAnimationMaker
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(472, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(463, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(456, 289);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -123,9 +124,9 @@ namespace SoundAnimationMaker
             this.logo.BackColor = System.Drawing.Color.Transparent;
             this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.logo.Image = ((System.Drawing.Image)(resources.GetObject("logo.Image")));
-            this.logo.Location = new System.Drawing.Point(12, 33);
+            this.logo.Location = new System.Drawing.Point(12, 12);
             this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(420, 149);
+            this.logo.Size = new System.Drawing.Size(174, 159);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logo.TabIndex = 6;
             this.logo.TabStop = false;
@@ -134,9 +135,9 @@ namespace SoundAnimationMaker
             // 
             this.nom.BackColor = System.Drawing.Color.Transparent;
             this.nom.Image = ((System.Drawing.Image)(resources.GetObject("nom.Image")));
-            this.nom.Location = new System.Drawing.Point(73, 188);
+            this.nom.Location = new System.Drawing.Point(60, 192);
             this.nom.Name = "nom";
-            this.nom.Size = new System.Drawing.Size(292, 222);
+            this.nom.Size = new System.Drawing.Size(328, 254);
             this.nom.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.nom.TabIndex = 7;
             this.nom.TabStop = false;
@@ -155,11 +156,22 @@ namespace SoundAnimationMaker
             this.buttonLancer.MouseLeave += new System.EventHandler(this.buttonLancer_MouseLeave);
             this.buttonLancer.MouseHover += new System.EventHandler(this.buttonLancer_MouseHover);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(469, 379);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Périphérique d\'entré";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 497);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonLancer);
             this.Controls.Add(this.nom);
             this.Controls.Add(this.logo);
@@ -182,6 +194,7 @@ namespace SoundAnimationMaker
             ((System.ComponentModel.ISupportInitialize)(this.nom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLancer)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -189,13 +202,14 @@ namespace SoundAnimationMaker
         private System.Windows.Forms.Timer timer_Son;
         private System.Windows.Forms.Timer timer_Image;
         private ComboBox combox;
-        private PictureBox pictureBox1;
+        public PictureBox pictureBox1;
         private PictureBox buttonParametre;
         private PictureBox buttonParcourir;
         private PictureBox buttonClose;
         private PictureBox logo;
         private PictureBox nom;
         private PictureBox buttonLancer;
+        private Label label1;
     }
 }
 
