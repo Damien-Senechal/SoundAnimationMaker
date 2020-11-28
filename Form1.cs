@@ -120,6 +120,7 @@ namespace SoundAnimationMaker
             Form2 form2 = new Form2(this);
             form2.Show();
             this.Hide();
+            
         }
     }
 }

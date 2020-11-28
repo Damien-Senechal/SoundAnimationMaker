@@ -80,7 +80,7 @@ namespace SoundAnimationMaker
 
         public void effectuerTransformation(String transformation, MagickImage deuxiemeImage)
         {
-            if (transformation == "defere") 
+            if (transformation == "differe") 
             differenceImage(deuxiemeImage);
         }
 

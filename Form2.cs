@@ -26,6 +26,7 @@ namespace SoundAnimationMaker
             buttonClose.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 135, Screen.PrimaryScreen.Bounds.Height - 35);
             fondForm2.BringToFront();
             this.Controls.Add(fondForm2);
+            GestionImage outilsImage = new GestionImage(fondForm2);
         }
 
         private void Form2_Load(object sender, EventArgs e)

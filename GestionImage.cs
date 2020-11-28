@@ -69,7 +69,7 @@ namespace SoundAnimationMaker
             }
         }
 
-        public void InserePremiereImage(String imageDepart)
+        public void InsererPremiereImage(String imageDepart)
         {
             Images img = new Images(accesVersBD + imageDepart + ".png");
             creeImage(img);
