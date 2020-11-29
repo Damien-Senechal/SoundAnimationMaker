@@ -19,63 +19,110 @@ namespace SoundAnimationMaker
     {
 
         
-        public static int compteur1 = 0;
+        public static int compteur = 0;
 
-        public static double moyenBass10_40 = 0;
+        public static bool flip, flop, negate, gris, flou, polar, differe, lumino, contrast, arc, rotate, edge, coul, cut;
 
-        public static double puissanceMax = 0;
-        public static double moyennePuissance = 0;
-        public static ArrayList listPuiss = new ArrayList();
+        public static void initBool()
+        {
+            flip = false;
+            flop = false;
+            negate = false;
+            gris = false;
+            flou = false;
+            polar = false;
+            differe = false;
+            lumino = false;
+            contrast = false;
+            arc = false;
+            rotate = false;
+            edge = false;
+            coul = false;
+            cut = false;
+        }
+
+        public static double MoyennePuissance(int debut,int fin)
+        {
+            double somme = 0;
+            int effectif = fin - debut;
+
+            for(int i = debut; i <= fin; i++)
+            {
+                somme += Son.getPuissance(i);
+            }
+
+            return somme / effectif;
+        }
+
+        public static double MoyenneTotale()
+        {
+            return MoyennePuissance(1, 20000);
+        }
 
         public static void GererImage(GestionImage outilsImage)
         {
+            initBool();
+            outilsImage.InsererPremiereImage("dophin");
 
-            int puissanceLimite = (int)moyennePuissance;
+            // if moyenne(a,b) > x --> transformation
 
-            //1
-            for (int i = 1; i <= 101; i++)
+            if (flip)
             {
-                moyenBass10_40 += Son.getPuissance(i);
-            }
-            moyenBass10_40 /= 200;
-
-            listPuiss.Add(moyenBass10_40);
-            foreach (double puiss in listPuiss)
+                outilsImage.modifierImage("flip");
+            }else if (flop)
             {
-                moyennePuissance += puiss;
+                outilsImage.modifierImage("flop");
             }
-            moyennePuissance /= listPuiss.Count;
-            if (moyennePuissance < 10)
-                moyennePuissance = 10;
-
-            
-            if (listPuiss.Count > 100)
+            else if (negate)
             {
-                for (int i = 0; i < listPuiss.Count; i++)
-                {
-                    listPuiss.RemoveAt(i);
-                }
+                outilsImage.modifierImage("negate");
             }
-
-            /*
-            label24.Text = "Puissance Moyenne : " + moyennePuissance;
-            if (moyenBass10_40 > puissanceMax)
+            else if (gris)
             {
-                puissanceMax = (int)moyenBass10_40;
-                label1.Text = "Puissance Max : " + puissanceMax;
+                outilsImage.modifierImage("gris");
             }
-
-            label2.Text = "Moyenne frequence 10 / 40 : " + (int)moyenBass10_40;
-
-            //int diff = (int)(moyennePuissance / moyenBass10_40) * 100;
-
-            if (moyenBass10_40 > moyennePuissance * 1.4)
+            else if (flou)
             {
-                label3.Text = "Nb basse :" + compteur1;
-                compteur1++;
-                moyenBass10_40 = 0;
+                outilsImage.modifierImage("flou");
             }
-            */
+            else if (polar)
+            {
+                outilsImage.modifierImage("flop");
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            else if (differe)
+            {
+                outilsImage.modifierImage("differe");
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            else if (lumino)
+            {
+                outilsImage.modifierImage("lumino");
+            }
+            else if (contrast)
+            {
+                outilsImage.modifierImage("contrast");
+            }
+            else if (arc)
+            {
+                outilsImage.modifierImage("arc");
+            }
+            else if (rotate)
+            {
+                outilsImage.modifierImage("rotate");
+            }
+            else if (edge)
+            {
+                outilsImage.modifierImage("edge");
+            }
+            else if (coul)
+            {
+                outilsImage.modifierImage("coul");
+            }
+            else if (cut)
+            {
+                outilsImage.modifierImage("cut");
+            }
         }
     }
 }
