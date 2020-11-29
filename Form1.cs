@@ -60,7 +60,7 @@ namespace SoundAnimationMaker
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         private void buttonClose_MouseHover(object sender, EventArgs e)
