@@ -60,7 +60,7 @@ namespace SoundAnimationMaker
         }
 
         //partie son basse :
-
+        private ECG ecg;
         bool busyRendering = false;
         int i = 1;
 
@@ -84,21 +84,19 @@ namespace SoundAnimationMaker
         }
 
         private Stopwatch stopWatch = new Stopwatch();
+        private String BPMAncien = "";
+        private String BPMActuel = "";
         private void timerRenderGraph_Tick(object sender, EventArgs e)
         {
             if (busyRendering)
                 return;
 
             busyRendering = true;
-            label8.Text = "% volume = " + volume;
-            label9.Text = "threshold : " + ecg.beatThreshold;
             int thresholdMin = (7000 * 2 * volume / 100);
-            label10.Text = "threshold max : " + thresholdMin;
             volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
 
 
             // create a new BPM trace from scratch
-            String text = lblBmp.Text;
             bool cLance = true;
             if (cLance)
             {
@@ -106,25 +104,23 @@ namespace SoundAnimationMaker
                 cLance = false;
             }
 
-            if (displayHeartbeats && ecg.beatTimes != null && ecg.beatTimes.Count > 0)
+            if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
             {
-                lblBmp.Text = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
+                BPMActuel = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
 
-                if (text != lblBmp.Text)
+                if (BPMAncien != BPMActuel)
                 {
                     if (ecg.beatThreshold > thresholdMin)
                     {
-                        label6.Text = "nombre basse : " + i;
-                        i++;
+                        //vibrer image
                     }
+                    BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
                     mettreAJourThreshol();
                     stopWatch.Restart();
 
 
                 }
-                scottPlotUC2.Render();
 
-                label7.Text = "StopWatch : " + stopWatch.ElapsedMilliseconds;
                 if (stopWatch.ElapsedMilliseconds > 1500)
                 {
                     maxPuiss = 0;
