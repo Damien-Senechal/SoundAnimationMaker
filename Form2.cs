@@ -15,7 +15,6 @@ namespace SoundAnimationMaker
         private int nbDevices = 0; 
         public Form2(Form1 frm)
         {
-            
             InitializeComponent();
             frmParent = frm;
             nbDevices = frm.combox.Items.Count;
