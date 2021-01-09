@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using Tulpep.NotificationWindow;
 
 namespace SoundAnimationMaker
 {
@@ -104,6 +104,13 @@ namespace SoundAnimationMaker
 
         private void buttonLancer_Click(object sender, EventArgs e)
         {
+            PopupNotifier popup = new PopupNotifier();
+            popup.AnimationDuration = 1000;
+            popup.Size = new Size(200, 100);
+            popup.TitleText =  "Attention";
+            popup.ContentText = "Veillez à bien avoir activer votre musique avant de commencer l'exerience :D";
+            popup.Popup();
+
             Form2 form2 = new Form2(this);
             form2.Show();
             this.Hide();
