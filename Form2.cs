@@ -11,13 +11,15 @@ namespace SoundAnimationMaker
         private Image closePushed = Image.FromFile("Ressources/closePushed.png");
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
+        private PictureBox fondForm2 = new PictureBox();
+        private int nbDevices = 0; 
         public Form2(Form1 frm)
         {
             
             InitializeComponent();
             frmParent = frm;
+            nbDevices = frm.combox.Items.Count;
             Image imageDeFondForm2 = frm.pictureBox1.Image;
-            PictureBox fondForm2 = new PictureBox();
             fondForm2.Image = imageDeFondForm2;
             fondForm2.SizeMode = PictureBoxSizeMode.StretchImage;
             fondForm2.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
@@ -33,7 +35,7 @@ namespace SoundAnimationMaker
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            Son.StartListening(nbDevices);
         }
 
         private void buttonClose_Click_1(object sender, EventArgs e)
@@ -60,78 +62,10 @@ namespace SoundAnimationMaker
         }
 
         //partie son basse :
-        private ECG ecg;
-        bool busyRendering = false;
-        int i = 1;
-
-        private int maxPuiss = 0;
-        private static MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
-        private static MMDevice defaultDevice = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-        int volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
-        private void mettreAJourThreshol()
+       
+        private void timer_Basse_Tick(object sender, EventArgs e)
         {
-            //réajuster le beathreshold
-            foreach (int i in ecg.bufferValues)
-            {
-                if (maxPuiss < i)
-                    maxPuiss = i;
-            }
-
-            if (maxPuiss > ecg.beatThreshold && (maxPuiss >= 7000 * ((2 * volume) / 100)))
-                ecg.beatThreshold = (int)(maxPuiss * 0.95);
-            maxPuiss = (int)(maxPuiss * 0.99);
-
-        }
-
-        private Stopwatch stopWatch = new Stopwatch();
-        private String BPMAncien = "";
-        private String BPMActuel = "";
-        private void timerRenderGraph_Tick(object sender, EventArgs e)
-        {
-            if (busyRendering)
-                return;
-
-            busyRendering = true;
-            int thresholdMin = (7000 * 2 * volume / 100);
-            volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
-
-
-            // create a new BPM trace from scratch
-            bool cLance = true;
-            if (cLance)
-            {
-                stopWatch.Start();
-                cLance = false;
-            }
-
-            if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
-            {
-                BPMActuel = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
-
-                if (BPMAncien != BPMActuel)
-                {
-                    if (ecg.beatThreshold > thresholdMin)
-                    {
-                        //vibrer image
-                    }
-                    BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
-                    mettreAJourThreshol();
-                    stopWatch.Restart();
-
-
-                }
-
-                if (stopWatch.ElapsedMilliseconds > 1500)
-                {
-                    maxPuiss = 0;
-                    ecg.beatThreshold = thresholdMin;
-                    mettreAJourThreshol();
-                    stopWatch.Restart();
-                }
-            }
-
-            Application.DoEvents();
-            busyRendering = false;
+            Son.checkBasse(fondForm2);
         }
 
 
@@ -141,5 +75,6 @@ namespace SoundAnimationMaker
             //GestionImage lancement = new GestionImage(pictureBox);
             //Controleur.GererImage(lancement);
         }
+
     }
 }

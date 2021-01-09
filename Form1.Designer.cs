@@ -196,7 +196,7 @@ namespace SoundAnimationMaker
         }
 
         #endregion
-        private ComboBox combox;
+        public ComboBox combox;
         public PictureBox pictureBox1;
         private PictureBox buttonParametre;
         private PictureBox buttonParcourir;

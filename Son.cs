@@ -1,7 +1,9 @@
-﻿using System;
+﻿using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -95,6 +97,96 @@ namespace SoundAnimationMaker
         public static double getPuissance(int frequence)
         {
             return dataFft[frequence - 1];
+        }
+
+
+        //Partie basse
+        public static void StartListening(int nbDevices)
+        {
+            // stop the old listener if it's running
+            if (ecg != null)
+                ecg.Stop();
+
+            // start a new listener
+            ecg = new ECG(nbDevices - 1);
+            ecg.beatThreshold = 2000;
+
+            while (ecg.values == null)
+                System.Threading.Thread.Sleep(10);
+
+        }
+
+        public static ECG ecg;
+        public static bool busyRendering = false;
+
+        public static int maxPuiss = 0;
+        public static MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
+        public static MMDevice defaultDevice = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+        public static int volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+        public static void mettreAJourThreshol()
+        {
+            //réajuster le beathreshold
+            foreach (int i in ecg.bufferValues)
+            {
+                if (maxPuiss < i)
+                    maxPuiss = i;
+            }
+
+            if (maxPuiss > ecg.beatThreshold && (maxPuiss >= 7000 * ((2 * volume) / 100)))
+                ecg.beatThreshold = (int)(maxPuiss * 0.95);
+            maxPuiss = (int)(maxPuiss * 0.99);
+
+        }
+
+        public static Stopwatch stopWatch = new Stopwatch();
+        public static String BPMAncien = "";
+        public static String BPMActuel = "";
+        public static void checkBasse(PictureBox pictureActuelle)
+        {
+            if (busyRendering)
+                return;
+            busyRendering = true;
+            int thresholdMin = (7000 * 2 * volume / 100);
+            volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+
+
+            // create a new BPM trace from scratch
+            bool cLance = true;
+            if (cLance)
+            {
+                stopWatch.Start();
+                cLance = false;
+            }
+
+            if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
+            {
+                BPMActuel = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
+
+                if (BPMAncien != BPMActuel)
+                {
+                    if (ecg.beatThreshold > thresholdMin)
+                    {
+                        GestionImage gestionBasse = new GestionImage(pictureActuelle);
+                        gestionBasse.trambler();
+                    }
+                    BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
+                    mettreAJourThreshol();
+                    stopWatch.Restart();
+
+
+                }
+
+                if (stopWatch.ElapsedMilliseconds > 1500)
+                {
+                    maxPuiss = 0;
+                    ecg.beatThreshold = thresholdMin;
+                    mettreAJourThreshol();
+                    stopWatch.Restart();
+                }
+            }
+
+            Application.DoEvents();
+            busyRendering = false;
         }
 
     }
