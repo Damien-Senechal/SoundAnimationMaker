@@ -41,6 +41,7 @@ namespace SoundAnimationMaker
             this.nom = new System.Windows.Forms.PictureBox();
             this.buttonLancer = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonRescan = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonParametre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonParcourir)).BeginInit();
@@ -48,14 +49,15 @@ namespace SoundAnimationMaker
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLancer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonRescan)).BeginInit();
             this.SuspendLayout();
             // 
             // combox
             // 
             this.combox.FormattingEnabled = true;
-            this.combox.Location = new System.Drawing.Point(472, 395);
+            this.combox.Location = new System.Drawing.Point(472, 377);
             this.combox.Name = "combox";
-            this.combox.Size = new System.Drawing.Size(196, 21);
+            this.combox.Size = new System.Drawing.Size(257, 21);
             this.combox.TabIndex = 0;
             // 
             // pictureBox1
@@ -75,7 +77,7 @@ namespace SoundAnimationMaker
             this.buttonParametre.BackColor = System.Drawing.Color.Transparent;
             this.buttonParametre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonParametre.Image = ((System.Drawing.Image)(resources.GetObject("buttonParametre.Image")));
-            this.buttonParametre.Location = new System.Drawing.Point(674, 395);
+            this.buttonParametre.Location = new System.Drawing.Point(472, 404);
             this.buttonParametre.Name = "buttonParametre";
             this.buttonParametre.Size = new System.Drawing.Size(125, 25);
             this.buttonParametre.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -145,7 +147,7 @@ namespace SoundAnimationMaker
             this.buttonLancer.Image = ((System.Drawing.Image)(resources.GetObject("buttonLancer.Image")));
             this.buttonLancer.Location = new System.Drawing.Point(472, 435);
             this.buttonLancer.Name = "buttonLancer";
-            this.buttonLancer.Size = new System.Drawing.Size(250, 50);
+            this.buttonLancer.Size = new System.Drawing.Size(257, 50);
             this.buttonLancer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.buttonLancer.TabIndex = 8;
             this.buttonLancer.TabStop = false;
@@ -157,17 +159,31 @@ namespace SoundAnimationMaker
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(469, 379);
+            this.label1.Location = new System.Drawing.Point(469, 361);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Périphérique d\'entré";
+            // 
+            // buttonRescan
+            // 
+            this.buttonRescan.BackColor = System.Drawing.Color.Transparent;
+            this.buttonRescan.Image = ((System.Drawing.Image)(resources.GetObject("buttonRescan.Image")));
+            this.buttonRescan.Location = new System.Drawing.Point(603, 404);
+            this.buttonRescan.Name = "buttonRescan";
+            this.buttonRescan.Size = new System.Drawing.Size(126, 25);
+            this.buttonRescan.TabIndex = 10;
+            this.buttonRescan.TabStop = false;
+            this.buttonRescan.Click += new System.EventHandler(this.buttonRescan_Click);
+            this.buttonRescan.MouseLeave += new System.EventHandler(this.buttonRescan_MouseLeave);
+            this.buttonRescan.MouseHover += new System.EventHandler(this.buttonRescan_MouseHover);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 497);
+            this.Controls.Add(this.buttonRescan);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonLancer);
             this.Controls.Add(this.nom);
@@ -190,6 +206,7 @@ namespace SoundAnimationMaker
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLancer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonRescan)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,6 +222,7 @@ namespace SoundAnimationMaker
         private PictureBox nom;
         private PictureBox buttonLancer;
         private Label label1;
+        private PictureBox buttonRescan;
     }
 }
 

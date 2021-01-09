@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using Tulpep.NotificationWindow;
 
 namespace SoundAnimationMaker
 {
@@ -20,6 +20,9 @@ namespace SoundAnimationMaker
 
         Image lancerPushed = Image.FromFile("Ressources/lancerPushed.png");
         Image lancer = Image.FromFile("Ressources/lancer.png");
+
+        Image rescan = Image.FromFile("Ressources/rescan.png");
+        Image rescanPushed = Image.FromFile("Ressources/rescanPushed.png");
 
         public Form1()
         {
@@ -43,6 +46,21 @@ namespace SoundAnimationMaker
         private void buttonParametre_MouseLeave(object sender, EventArgs e)
         {
             buttonParametre.Image = parametre;
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            Son.ScanSoundCards(combox);
+        }
+
+        private void buttonRescan_MouseHover(object sender, EventArgs e)
+        {
+            buttonRescan.Image = rescanPushed;
+        }
+
+        private void buttonRescan_MouseLeave(object sender, EventArgs e)
+        {
+            buttonRescan.Image = rescan;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -105,6 +123,13 @@ namespace SoundAnimationMaker
 
         private void buttonLancer_Click(object sender, EventArgs e)
         {
+            PopupNotifier popup = new PopupNotifier();
+            popup.AnimationDuration = 1000;
+            popup.Size = new Size(200, 100);
+            popup.TitleText =  "Attention";
+            popup.ContentText = "Veillez à bien avoir activer votre musique avant de commencer l'exerience :D";
+            popup.Popup();
+
             Form2 form2 = new Form2(this);
             form2.Show();
             this.Hide();
