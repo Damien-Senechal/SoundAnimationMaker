@@ -85,3 +85,5 @@ C:\Users\morga\Desktop\perso\ProjetTakAptai\SoundAnimationMaker\obj\Debug\SoundA
 C:\Users\morga\Desktop\perso\ProjetTakAptai\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.pdb
 C:\Users\morga\Desktop\perso\ProjetTakAptai\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.Form2.resources
 E:\DossierLoris\MonProfil\MesDocumentEcole\IUT\2emeAnnee\Projet\SoundAnimationMaker\obj\Debug\SoundAnimationMaker.Form2.resources
+C:\Users\morga\Desktop\perso\ProjetTakAptai\SoundAnimationMaker\bin\Debug\MathNet.Numerics.dll
+C:\Users\morga\Desktop\perso\ProjetTakAptai\SoundAnimationMaker\bin\Debug\MathNet.Numerics.xml
