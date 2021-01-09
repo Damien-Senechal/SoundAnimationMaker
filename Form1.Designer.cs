@@ -31,10 +31,7 @@ namespace SoundAnimationMaker
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.timer_Son = new System.Windows.Forms.Timer(this.components);
-            this.timer_Image = new System.Windows.Forms.Timer(this.components);
             this.combox = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonParametre = new System.Windows.Forms.PictureBox();
@@ -199,8 +196,6 @@ namespace SoundAnimationMaker
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer_Son;
-        private System.Windows.Forms.Timer timer_Image;
         private ComboBox combox;
         public PictureBox pictureBox1;
         private PictureBox buttonParametre;
