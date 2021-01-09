@@ -152,7 +152,7 @@ namespace SoundAnimationMaker
             compteur++;
         }
 
-        private void trambler()
+        public void trambler()
         {
             Random randNum = new Random();
             int X = randNum.Next(16);
