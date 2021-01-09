@@ -30,19 +30,6 @@ namespace SoundAnimationMaker
         }
 
 
-        private void timer_Son_Tick(object sender, EventArgs e)
-        {
-            Son.UpdatePuissance();
-        }
-
-
-        private void timer_Image_Tick(object sender, EventArgs e)
-        {
-            
-            //GestionImage lancement = new GestionImage(pictureBox);
-            //Controleur.GererImage(lancement);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 

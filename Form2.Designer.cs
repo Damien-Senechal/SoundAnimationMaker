@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.buttonClose = new System.Windows.Forms.PictureBox();
+            this.timer_Son = new System.Windows.Forms.Timer(this.components);
+            this.timer_image = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,5 +65,7 @@
 
         #endregion
         private System.Windows.Forms.PictureBox buttonClose;
+        private System.Windows.Forms.Timer timer_Son;
+        private System.Windows.Forms.Timer timer_image;
     }
 }
