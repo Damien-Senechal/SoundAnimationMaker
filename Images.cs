@@ -34,6 +34,11 @@ namespace SoundAnimationMaker
             return this.image;
         }
 
+        public String getTailleImage()
+        {
+            return image.Height + " " + image.Width;
+        }
+
         public void RedimensionnerImage()
         {
             var size = new MagickGeometry(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);

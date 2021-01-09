@@ -84,6 +84,7 @@ namespace SoundAnimationMaker
             {
                 Image image = Image.FromFile(dialog.FileName);
                 pictureBox1.Image = image;
+                pictureBox1.Image.Save("../../Image/imageTampon/imageModifiee0.png", System.Drawing.Imaging.ImageFormat.Png);
             }
         }
 

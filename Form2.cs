@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SoundAnimationMaker
@@ -11,7 +12,7 @@ namespace SoundAnimationMaker
         private Image closePushed = Image.FromFile("Ressources/closePushed.png");
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
-        private PictureBox fondForm2 = new PictureBox();
+        private static PictureBox fondForm2 = new PictureBox();
         private int nbDevices = 0; 
         public Form2(Form1 frm)
         {
@@ -30,16 +31,20 @@ namespace SoundAnimationMaker
             fondForm2.BringToFront();
             this.Controls.Add(fondForm2);
             GestionImage outilsImage = new GestionImage(fondForm2);
+
+            timer_Son.Start();
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            Son.StartListening(nbDevices);
+            Son.StartListening();
+            Son.AudioMonitorInitialize(frmParent.combox.SelectedIndex);
         }
 
         private void buttonClose_Click_1(object sender, EventArgs e)
         {
             Form1 form1 = new Form1();
+            form1.pictureBox1.Image = fondForm2.Image;
             form1.Show();            
             this.Hide();
             this.Close();
@@ -55,9 +60,11 @@ namespace SoundAnimationMaker
             buttonClose.Image = close;
         }
 
+        private GestionImage gestionGlobale = new GestionImage(fondForm2);
         private void timer_Son_Tick(object sender, EventArgs e)
         {
             Son.UpdatePuissance();
+            Controleur.GererImage(gestionGlobale);
         }
 
         //partie son basse :

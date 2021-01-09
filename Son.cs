@@ -1,4 +1,5 @@
 ﻿using NAudio.CoreAudioApi;
+using SoundCardECG;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +43,9 @@ namespace SoundAnimationMaker
         {
             combox.Items.Clear();
             for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+            {
                 combox.Items.Add(NAudio.Wave.WaveIn.GetCapabilities(i).ProductName);
+            }
             if (combox.Items.Count > 0)
                 combox.SelectedIndex = 0;
             else
@@ -96,23 +99,33 @@ namespace SoundAnimationMaker
 
         public static double getPuissance(int frequence)
         {
-            return dataFft[frequence - 1];
+            if (Son.dataPcm == null || frequence > 8000)
+                return 0;
+            else if (frequence < 65)
+            {
+                frequence = 65;
+            }
+            return dataFft[(int) (frequence / 64) - 1];
         }
 
 
+
+
+
+
         //Partie basse
-        public static void StartListening(int nbDevices)
+        public static void StartListening()
         {
             // stop the old listener if it's running
             if (ecg != null)
                 ecg.Stop();
 
             // start a new listener
-            ecg = new ECG(nbDevices - 1);
+            ecg = new ECG(0);
             ecg.beatThreshold = 2000;
 
             while (ecg.values == null)
-                System.Threading.Thread.Sleep(10);
+                Thread.Sleep(10);
 
         }
 
@@ -123,6 +136,7 @@ namespace SoundAnimationMaker
         public static MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
         public static MMDevice defaultDevice = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
         public static int volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
+
         public static void mettreAJourThreshol()
         {
             //réajuster le beathreshold
@@ -141,12 +155,14 @@ namespace SoundAnimationMaker
         public static Stopwatch stopWatch = new Stopwatch();
         public static String BPMAncien = "";
         public static String BPMActuel = "";
-        public static void checkBasse(PictureBox pictureActuelle)
+        public static int i = 0;
+
+        public static void checkBasse(PictureBox pictureBox2)
         {
             if (busyRendering)
                 return;
             busyRendering = true;
-            int thresholdMin = (7000 * 2 * volume / 100);
+            int thresholdMin = (7000* 2* volume / 100);
             volume = Convert.ToInt32(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100);
 
 
@@ -161,13 +177,37 @@ namespace SoundAnimationMaker
             if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
             {
                 BPMActuel = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
+                Console.WriteLine(BPMActuel);
 
                 if (BPMAncien != BPMActuel)
                 {
                     if (ecg.beatThreshold > thresholdMin)
                     {
-                        GestionImage gestionBasse = new GestionImage(pictureActuelle);
-                        gestionBasse.trambler();
+                        Random randNum = new Random();
+                        int X = randNum.Next(16);
+                        int Xdf = randNum.Next(8);
+                        int Y = randNum.Next(3);
+
+                        pictureBox2.Location = new Point(pictureBox2.Location.X - Xdf, pictureBox2.Location.Y - Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
+                        System.Threading.Thread.Sleep(10);
+                        pictureBox2.Location = new Point(pictureBox2.Location.X + Xdf, pictureBox2.Location.Y + Y);
+                        System.Threading.Thread.Sleep(10);
                     }
                     BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
                     mettreAJourThreshol();
@@ -175,7 +215,7 @@ namespace SoundAnimationMaker
 
 
                 }
-
+                
                 if (stopWatch.ElapsedMilliseconds > 1500)
                 {
                     maxPuiss = 0;
@@ -187,6 +227,15 @@ namespace SoundAnimationMaker
 
             Application.DoEvents();
             busyRendering = false;
+        }
+
+
+        public static double getBpm()
+        {
+            if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
+                return ecg.beatRates[ecg.beatRates.Count - 1];
+            else
+                return 0;
         }
 
     }

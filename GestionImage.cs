@@ -14,14 +14,19 @@ namespace SoundAnimationMaker
     class GestionImage
     {
         private int compteur; //compte le nombre d'opération sur image
-        public String accesVersTampon = "././Image/ImageTampon/";
-        public String accesVersBD = "././Image/banqueImage/";
-        public PictureBox pictureBox;
+        public String accesVersTampon = "../../Image/imageTampon/";
+        public String accesVersBD = "../../Image/banqueImage/";
+        public static PictureBox pictureBox;
 
-        public GestionImage(PictureBox pictureBox) //constructeur de la classe
+        public GestionImage(PictureBox pictureBox2) //constructeur de la classe
         {
             this.compteur = 0;
-            this.pictureBox = pictureBox;
+            pictureBox = pictureBox2;
+        }
+
+        public static PictureBox getPictureBox()
+        {
+            return pictureBox;
         }
 
         public void supprimeVieilleImage() //permet de supprimer les images tampon et éviter de prendre trop de place en mémoire
@@ -29,7 +34,7 @@ namespace SoundAnimationMaker
             string[] fileList = Directory.GetFiles(accesVersTampon);
             foreach (string f in fileList)
             {
-                if (f != accesVersTampon + "imageModifiee" + (compteur - 1) + ".png")
+                if ((f != accesVersTampon + "imageModifiee" + (compteur - 1) + ".png") && (f != accesVersTampon + "imageModifiee" + compteur + ".png"))
                 File.Delete(f);
             }
         }
@@ -44,10 +49,19 @@ namespace SoundAnimationMaker
 
         public void afficheImage() //fonction qui permet d'afficher l'image qui vient d'être modifiée
         {
-            FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
-            pictureBox.Image = Image.FromStream(photoStream);
-            photoStream.Close();
+            try
+            {
+                FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
+                pictureBox.Image = Image.FromStream(photoStream);
+                photoStream.Close();
 
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
+            
         }
 
         public void creeImage(Images imageModifiee) 
@@ -67,13 +81,6 @@ namespace SoundAnimationMaker
             {
                 File.Delete(f);
             }
-        }
-
-        public void InsererPremiereImage(String imageDepart)
-        {
-            Images img = new Images(accesVersBD + imageDepart + ".png");
-            creeImage(img);
-            afficheImage(accesVersBD, imageDepart);
         }
 
         public void modifierImage(String transformation)
@@ -150,35 +157,6 @@ namespace SoundAnimationMaker
             }
             File.Move(accesVersTampon + "-" + (i - 1) + ".jpg", accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
             compteur++;
-        }
-
-        public void trambler()
-        {
-            Random randNum = new Random();
-            int X = randNum.Next(16);
-            int Xdf = randNum.Next(8);
-            int Y = randNum.Next(3);
-
-            pictureBox.Location = new Point(pictureBox.Location.X - Xdf, pictureBox.Location.Y - Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X + X, pictureBox.Location.Y + Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X - X, pictureBox.Location.Y - Y);
-            System.Threading.Thread.Sleep(10);
-            pictureBox.Location = new Point(pictureBox.Location.X + Xdf, pictureBox.Location.Y + Y);
-            System.Threading.Thread.Sleep(10);
         }
 
 
