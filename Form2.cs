@@ -13,7 +13,6 @@ namespace SoundAnimationMaker
         private Form1 frmParent;
         public Form2(Form1 frm)
         {
-            
             InitializeComponent();
             frmParent = frm;
             Image imageDeFondForm2 = frm.pictureBox1.Image;
