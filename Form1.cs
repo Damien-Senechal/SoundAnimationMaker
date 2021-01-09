@@ -21,6 +21,9 @@ namespace SoundAnimationMaker
         Image lancerPushed = Image.FromFile("Ressources/lancerPushed.png");
         Image lancer = Image.FromFile("Ressources/lancer.png");
 
+        Image rescan = Image.FromFile("Ressources/rescan.png");
+        Image rescanPushed = Image.FromFile("Ressources/rescanPushed.png");
+
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +46,21 @@ namespace SoundAnimationMaker
         private void buttonParametre_MouseLeave(object sender, EventArgs e)
         {
             buttonParametre.Image = parametre;
+        }
+
+        private void buttonRescan_Click(object sender, EventArgs e)
+        {
+            Son.ScanSoundCards(combox);
+        }
+
+        private void buttonRescan_MouseHover(object sender, EventArgs e)
+        {
+            buttonRescan.Image = rescanPushed;
+        }
+
+        private void buttonRescan_MouseLeave(object sender, EventArgs e)
+        {
+            buttonRescan.Image = rescan;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
