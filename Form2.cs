@@ -14,15 +14,13 @@ namespace SoundAnimationMaker
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
         private static PictureBox fondForm2 = new PictureBox();
-<<<<<<< HEAD
-=======
-        private int nbDevices = 0;
->>>>>>> ae7afeeda216012c8b5bd0675041da263afd8a7f
         public Form2(Form1 frm)
         {
             InitializeComponent();
             frmParent = frm;
             Image imageDeFondForm2 = frm.pictureBox1.Image;
+            timer_Son.Start();
+            timer_Basse.Start();
             fondForm2.Image = imageDeFondForm2;
             fondForm2.SizeMode = PictureBoxSizeMode.StretchImage;
             fondForm2.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
@@ -33,7 +31,6 @@ namespace SoundAnimationMaker
             buttonClose.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 135, Screen.PrimaryScreen.Bounds.Height - 35);
             fondForm2.BringToFront();
             this.Controls.Add(fondForm2);
-            GestionImage outilsImage = new GestionImage(fondForm2);
 
             timer_Son.Start();
         }
@@ -47,7 +44,7 @@ namespace SoundAnimationMaker
 
         private void buttonClose_Click_1(object sender, EventArgs e)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(800);
             string[] fileList = Directory.GetFiles(GestionImage.accesVersTampon);
             foreach (string f in fileList)
             {
@@ -56,6 +53,9 @@ namespace SoundAnimationMaker
             }
             File.Move(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur) + ".png", GestionImage.accesVersTampon + "imageModifiee0.png");
 
+            GestionImage.compteur = 0;
+            timer_Basse.Stop();
+            timer_Son.Stop();
             Form1 form1 = new Form1();
             form1.pictureBox1.Image = fondForm2.Image;
             form1.Show();
@@ -74,7 +74,7 @@ namespace SoundAnimationMaker
 
         private void timer_Basse_Tick(object sender, EventArgs e)
         {
-            Son.checkBasse(fondForm2);
+            Son.checkBasse(fondForm2, gestionGlobale);
         }
 
         GestionImage gestionGlobale = new GestionImage(fondForm2);
@@ -84,9 +84,45 @@ namespace SoundAnimationMaker
             Controleur.GererImage(gestionGlobale);
         }
 
-        //partie son basse :
-
-        
-
+        public static int i = 0;
+        private void timer_affichage_Tick(object sender, EventArgs e)
+        {
+            string[] filesTot = Directory.GetFiles(@"../../Image/banqueImage/", "*.png");
+            if (filesTot.Length > 5)
+            {
+                Console.WriteLine("timerTransition, i =" + i);
+                if (i < 3)
+                {
+                    if (File.Exists(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png"))
+                    {
+                        gestionGlobale.afficheImage(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png");
+                        Thread.Sleep(100);
+                        File.Delete(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png");
+                        i++;
+                    }
+                    else
+                    {
+                        string[] files = Directory.GetFiles(@"../../Image/imageTampon/", "*.png");
+                        File.Move(files[0], GestionImage.accesVersTampon + "imageModifiee0.png");
+                        GestionImage.compteur = 0;
+                        i = 0;
+                        Controleur.transiImageenCour = false;
+                        Controleur.enCour = false;
+                        timer_affichage.Stop();
+                    }
+                }
+                else
+                {
+                    gestionGlobale.afficheImage(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png");
+                    File.Move(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png", GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + ".png");
+                    GestionImage.compteur++;
+                    Thread.Sleep(100);
+                    i = 0;
+                    Controleur.transiImageenCour = false;
+                    Controleur.enCour = false;
+                    timer_affichage.Stop();
+                }
+            }
+        }
     }
 }

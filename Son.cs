@@ -156,8 +156,9 @@ namespace SoundAnimationMaker
         public static String BPMAncien = "";
         public static String BPMActuel = "";
         public static int i = 0;
+        public static bool boolTurn = false;
 
-        public static void checkBasse(PictureBox pictureBox2)
+        public static void checkBasse(PictureBox pictureBox2, GestionImage gi)
         {
             if (busyRendering)
                 return;
@@ -185,7 +186,7 @@ namespace SoundAnimationMaker
                         /*Random randNum = new Random();
                         int X = randNum.Next(8);
                         int Xdf = randNum.Next(8);
-                        int Y = randNum.Next(3);*/
+                        int r = randNum.Next(3);*/
 
                         int X = 5;
                         int Xdf = 5;
@@ -203,6 +204,17 @@ namespace SoundAnimationMaker
                         System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
                         System.Threading.Thread.Sleep(5);
+
+                        if (boolTurn)
+                        {
+                            gi.modifierImage("rotate", 2);
+                            boolTurn = false;
+                        } else
+                        {
+                            gi.modifierImage("rotate", -2);
+                            boolTurn = true;
+                        }
+                            
                     }
                     BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
                     mettreAJourThreshol();

@@ -202,7 +202,7 @@ namespace SoundAnimationMaker
             MagickImageCollection collection = new MagickImageCollection();
             collection.Add(image);
             collection.Add(image2.image);
-            collection.Morph(10);
+            collection.Morph(2);
             return collection;
         }
 

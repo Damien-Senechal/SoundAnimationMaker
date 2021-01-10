@@ -13,15 +13,10 @@ namespace SoundAnimationMaker
 {
     class GestionImage
     {
-<<<<<<< HEAD
-        private static int compteur; //compte le nombre d'opération sur image
-        public static String accesVersTampon = "../../Image/imageTampon/";
-        public String accesVersBD = "../../Image/banqueImage/";
-=======
+
         public static int compteur; //compte le nombre d'opération sur image
         public static String accesVersTampon = "../../Image/imageTampon/";
         public static String accesVersBD = "../../Image/banqueImage/";
->>>>>>> ae7afeeda216012c8b5bd0675041da263afd8a7f
         public static PictureBox pictureBox;
 
         public GestionImage(PictureBox pictureBox2) //constructeur de la classe
@@ -45,19 +40,40 @@ namespace SoundAnimationMaker
             }
         }
 
-        public void afficheImage(String chemin, String nomImage) //fonction qui permet d'afficher l'image qui vient d'être modifiée
+        public void afficheImage(String cheminComplet) //fonction qui permet d'afficher l'image qui vient d'être modifiée
         {
-            FileStream photoStream = File.OpenRead(chemin + nomImage + ".png");
-            pictureBox.Image = Image.FromStream(photoStream);
-            photoStream.Close();
+            try
+            {
+                FileStream photoStream = File.OpenRead(cheminComplet);
+                Console.WriteLine("1 :" + cheminComplet);
+                pictureBox.Image = Image.FromStream(photoStream);
+                photoStream.Close();
+            }
+            catch (Exception)
+            {
+                string[] files = Directory.GetFiles(@"../../Image/imageTampon/", "*.png");
+                File.Move(files[0], accesVersTampon + "imageModifiee0.png");
+                compteur = 0;
+            }
+            
 
         }
 
         public void afficheImage() //fonction qui permet d'afficher l'image qui vient d'être modifiée
         {
-            FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
-            pictureBox.Image = Image.FromStream(photoStream);
-            photoStream.Close();
+            try
+            {
+                FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
+                Console.WriteLine("2 :" + accesVersTampon + "imageModifiee" + compteur + ".png");
+                pictureBox.Image = Image.FromStream(photoStream);
+                photoStream.Close();
+            }
+            catch (Exception)
+            {
+                string[] files = Directory.GetFiles(@"../../Image/imageTampon/", "*.png");
+                File.Move(files[0], accesVersTampon + "imageModifiee0.png");
+                compteur = 0;
+            }
         }
 
         public void creeImage(Images imageModifiee) 
@@ -67,17 +83,6 @@ namespace SoundAnimationMaker
             supprimeVieilleImage();
         }
 
-        public void ResetImage()
-        {
-            compteur = 0;
-            afficheImage(accesVersBD, "imageDepart");
-
-            string[] fileList = Directory.GetFiles(accesVersTampon);
-            foreach (string f in fileList)
-            {
-                File.Delete(f);
-            }
-        }
 
         public void modifierImage(String transformation)
         {
@@ -127,32 +132,10 @@ namespace SoundAnimationMaker
             Images img2 = new Images(cheminImage);
             MagickImageCollection collection = img.transitionEntreImages(img2);
             collection.Write(accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
-            int i = 0;
-            foreach (MagickImage image in collection)
-            {
-                afficheImage(accesVersTampon, "imageModifiee" + (compteur+1) + "-" + i);
-                i++;
-            }
-            File.Move(accesVersTampon + "imageModifiee" + (compteur + 1) + "-" + (i-1) + ".png", accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
-            compteur++;
-            Controleur.transiImageenCour = false;
-        }
+            Console.WriteLine("transitions");
+            Thread.Sleep(800);
 
-        public void transitionEntreImage(String nomImage, int nbImageTransition)
-        {
-            Images img = new Images(accesVersTampon + "imageModifiee" + compteur + ".png");
-            Images img2 = new Images(accesVersBD + nomImage + ".png");
-            MagickImageCollection collection = img.transitionEntreImages(img2, nbImageTransition);
-            collection.Write(accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
-            int i = 0;
-            foreach (MagickImage image in collection)
-            {
-                afficheImage(accesVersTampon, "imageModifiee" + compteur + "-" + i);
-                Thread.Sleep(5);
-                i++;
-            }
-            File.Move(accesVersTampon + "-" + (i - 1) + ".png", accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
-            compteur++;
+            Form2.timer_affichage.Start();
         }
 
 
