@@ -114,7 +114,7 @@ namespace SoundAnimationMaker
             this.buttonClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.buttonClose.TabIndex = 5;
             this.buttonClose.TabStop = false;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.buttonCloseForm1_Click);
             this.buttonClose.MouseLeave += new System.EventHandler(this.buttonClose_MouseLeave);
             this.buttonClose.MouseHover += new System.EventHandler(this.buttonClose_MouseHover);
             // 

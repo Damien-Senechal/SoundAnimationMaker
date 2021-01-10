@@ -13,14 +13,14 @@ namespace SoundAnimationMaker
 {
     class GestionImage
     {
-        private int compteur; //compte le nombre d'opération sur image
-        public String accesVersTampon = "../../Image/imageTampon/";
-        public String accesVersBD = "../../Image/banqueImage/";
+        public static int compteur; //compte le nombre d'opération sur image
+        public static String accesVersTampon = "../../Image/imageTampon/";
+        public static String accesVersBD = "../../Image/banqueImage/";
         public static PictureBox pictureBox;
 
         public GestionImage(PictureBox pictureBox2) //constructeur de la classe
         {
-            this.compteur = 0;
+            compteur = 0;
             pictureBox = pictureBox2;
         }
 

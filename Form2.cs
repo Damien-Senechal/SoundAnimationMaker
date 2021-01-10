@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace SoundAnimationMaker
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
         private static PictureBox fondForm2 = new PictureBox();
-        private int nbDevices = 0; 
+        private int nbDevices = 0;
         public Form2(Form1 frm)
         {
             InitializeComponent();
@@ -43,11 +44,19 @@ namespace SoundAnimationMaker
 
         private void buttonClose_Click_1(object sender, EventArgs e)
         {
+            Thread.Sleep(100);
+            string[] fileList = Directory.GetFiles(GestionImage.accesVersTampon);
+            foreach (string f in fileList)
+            {
+                if (f != GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur) + ".png")
+                    File.Delete(f);
+            }
+            File.Move(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur) + ".png", GestionImage.accesVersTampon + "imageModifiee0.png");
+
             Form1 form1 = new Form1();
             form1.pictureBox1.Image = fondForm2.Image;
-            form1.Show();            
+            form1.Show();
             this.Hide();
-            this.Close();
         }
 
         private void buttonClose_MouseHover(object sender, EventArgs e)
