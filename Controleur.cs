@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using ImageMagick;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
+using System.Threading;
+using System.Drawing;
 
 namespace SoundAnimationMaker
 {
@@ -86,7 +83,6 @@ namespace SoundAnimationMaker
             }
             return 0;
         }
-
         //partie moyenne
         public static double checkMoy()
         {
@@ -105,8 +101,6 @@ namespace SoundAnimationMaker
             }
             return 0;
         }
-
-
         //partie aigue
         public static double checkAigue()
         {
@@ -134,155 +128,183 @@ namespace SoundAnimationMaker
             return files[X];
         }
 
+        public static void afficherGif(String cheminGif)
+        {
+            PictureBox PictureGif = new PictureBox();
+            PictureGif.BackColor = System.Drawing.Color.Transparent;
+            PictureGif.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2);
+            PictureGif.Name = "pictureGif";
+            PictureGif.Size = new System.Drawing.Size(500, 500);
+            FileStream photoStream = File.OpenRead(cheminGif);
+            PictureGif.Image = Image.FromStream(photoStream);
+            photoStream.Close();
+        }
+
         public static bool enCour = false;
         public static bool transiImageenCour = false;
+
+
         public static void GererImage(GestionImage gestionImage)
         {
-            Console.WriteLine(transiImageenCour);
+            Random randNum = new Random();
             if (enCour)
                 return;
-            enCour = true;
             if (transiImageenCour)
                 return;
+            enCour = true;
+
+            compteur++;
+            if (compteurTransformation > 5)
+            {
+                transiImageenCour = true;
+                getImageRandom();
+                gestionImage.transitionEntreImage(getImageRandom());
+                compteurTransformation = 0;
+                return;
+            }
 
             double valGravcheckGrave = checkGrave();
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
-            getImageRandom();
-            compteur++;
-            if (compteur > 10) {
-                compteur = 0;
-                initBool();
-            }
-            if (compteurTransformation > 5)
+            afficherGif("../../Animation/explosion.gif");
+
+            if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
             {
-                transiImageenCour = true;
-                gestionImage.transitionEntreImage(getImageRandom());
-                compteurTransformation = 0;
+                afficherGif("../../Animation/explosion.gif");
             }
+
             Bpm = Son.getBpm();
             if (valGravcheckGrave != 0)
             {
                 if(valGravcheckAigue < 10)
                 {
-                    flop = true;
-                    Console.WriteLine("flop");
-                } else if (valGravcheckGrave > 10 && valGravcheckGrave <= 100)
-                {
-                    rotate = true;
-                    Console.WriteLine("rotate");
-                } else if (valGravcheckGrave > 100 && valGravcheckGrave <= 200) {
                     flip = true;
-                    Console.WriteLine("flip");
+                } else if (valGravcheckGrave > 10 && valGravcheckGrave <= 75)
+                {
+                    flop = true;
+                }
+                else if (valGravcheckGrave > 75 && valGravcheckGrave <= 150)
+                {
+                    edge = true;
+                }
+                else if (valGravcheckGrave > 150 && valGravcheckGrave <= 200) {
+                    flou = true;
                 }
             } else if (valGravcheckMoy != 0)
             {
                 if (valGravcheckMoy > 200 && valGravcheckMoy <= 300)
                 {
                     lumino = true;
-                    Console.WriteLine("lumino");
                 }
                 else if (valGravcheckMoy > 300 && valGravcheckMoy <= 500)
                 {
-                    rotate = true;
-                    Console.WriteLine("rotate");
+                    polar = true;
                 }
                 else if (valGravcheckMoy > 500 && valGravcheckMoy <= 700)
                 {
-                    polar = true;
-                    Console.WriteLine("polar");
+                    arc = true;
                 }
                 else if (valGravcheckMoy > 700 && valGravcheckMoy <= 1000)
                 {
-                    arc = true;
-                    Console.WriteLine("arc");
+                    contrast = true;
                 }
                 else if (valGravcheckMoy > 1000 && valGravcheckMoy <= 1500)
                 {
-                    flou = true;
-                    Console.WriteLine("flou");
+                    coul = true;
                 }
                 else if (valGravcheckMoy > 1500 && valGravcheckMoy <= 2000)
                 {
-                    contrast = true;
-                    Console.WriteLine("contrast");
+                    negate = true;
                 }
 
             } else if (valGravcheckAigue != 0)
             {
-
-            } else
-            {
-                //initBool();
-            }
+                differe = true;
+            } 
 
 
             if (flip)
             {
                 compteurTransformation++;
+                Console.WriteLine("flip");
                 gestionImage.modifierImage("flip");
             }else if (flop)
             {
+                Console.WriteLine("flop");
                 compteurTransformation++;
                 gestionImage.modifierImage("flop");
             }
             else if (negate)
             {
+                Console.WriteLine("negate");
                 compteurTransformation++;
                 gestionImage.modifierImage("negate");
             }
             else if (gris)
             {
+                Console.WriteLine("gris");
                 compteurTransformation++;
                 gestionImage.modifierImage("gris");
             }
             else if (flou)
             {
+                Console.WriteLine("flou");
                 compteurTransformation++;
                 gestionImage.modifierImage("flou");
             }
             else if (polar)
             {
+                Console.WriteLine("polar");
                 compteurTransformation++;
                 gestionImage.modifierImage("polar");
             }
             else if (differe)
             {
+                Console.WriteLine("differe");
                 compteurTransformation++;
-                gestionImage.modifierImage("differe");
+                var image2 = new MagickImage();
+                image2.Read(getImageRandom());
+                gestionImage.modifierImage("differe", image2);
             }
             else if (lumino)
             {
+                Console.WriteLine("lumino");
                 compteurTransformation++;
-                gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy));
+                gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy) / 2);
             }
             else if (contrast)
             {
+                Console.WriteLine("contrast");
                 compteurTransformation++;
-                gestionImage.modifierImage("contrast", (int)(valGravcheckMoy / moyMoy) / 2);
+                gestionImage.modifierImage("contrast", (int)(valGravcheckMoy / moyMoy) );
             }
             else if (arc)
             {
+                Console.WriteLine("arc");
                 compteurTransformation++;
-                gestionImage.modifierImage("arc", 1);
+                gestionImage.modifierImage("arc", 5);
             }
             else if (rotate)
             {
+                Console.WriteLine("rotate");
                 compteurTransformation++;
-                gestionImage.modifierImage("rotate", (int)(valGravcheckGrave / moyGrave));
+                gestionImage.modifierImage("rotate", 2);
             }
             else if (edge)
             {
+                Console.WriteLine("edge");
                 compteurTransformation++;
                 gestionImage.modifierImage("edge", (int)(valGravcheckMoy / moyMoy));
             }
             else if (coul)
             {
+                Console.WriteLine("coul");
                 compteurTransformation++;
-                gestionImage.modifierImage("coul", new MagickColor(200,200,200), new MagickColor(100,45,59));
+                gestionImage.modifierImage("coul", new MagickColor((ushort)randNum.Next(255), (ushort)randNum.Next(255), (ushort)randNum.Next(255)), new MagickColor(100, 45, 59));
             }
             else if (cut)
             {
+                Console.WriteLine("cut");
                 compteurTransformation++;
                 gestionImage.modifierImage("cut");
             }
