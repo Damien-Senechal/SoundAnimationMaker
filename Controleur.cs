@@ -17,10 +17,19 @@ namespace SoundAnimationMaker
 {
     static class Controleur
     {
+        public static double moyTamponGrave = 0;
+        public static int compteurMoyGrave = 1;
+        public static double moyGrave = 0;
+        public static double moyTamponMoy = 0;
+        public static int compteurMoyMoy = 1;
+        public static double moyMoy = 0;
+        public static double moyTamponAigue = 0;
+        public static int compteurMoyAigue = 1;
+        public static double moyAigue = 0;
 
-        
         public static int compteur = 0;
 
+        public static double Bpm = 0;
         public static bool flip, flop, negate, gris, flou, polar, differe, lumino, contrast, arc, rotate, edge, coul, cut;
 
         public static void initBool()
@@ -41,7 +50,7 @@ namespace SoundAnimationMaker
             cut = false;
         }
 
-        public static double MoyennePuissance(int debut,int fin)
+        public static double moyennePuissance(int debut,int fin)
         {
             double somme = 0;
             int effectif = fin - debut;
@@ -56,72 +65,188 @@ namespace SoundAnimationMaker
 
         public static double MoyenneTotale()
         {
-            return MoyennePuissance(1, 20000);
+            return moyennePuissance(1, 20000);
         }
 
-        public static void GererImage(GestionImage outilsImage)
+        //partie Grave
+        public static double checkGrave() 
         {
-            initBool();
-            outilsImage.InsererPremiereImage("dophin");
+            moyGrave = moyennePuissance(0, 200);
+            moyTamponGrave += moyGrave;
+            compteurMoyGrave++;
+            moyGrave = (moyTamponGrave) / compteurMoyGrave;
 
-            // if moyenne(a,b) > x --> transformation
+            for (int i = 0; i < 200; i++)
+            {
+                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100) {
+                    initBool();
+                    return Son.getPuissance(i);
+                }
+            }
+            return 0;
+        }
+
+        //partie moyenne
+        public static double checkMoy()
+        {
+            moyMoy = moyennePuissance(200, 2000);
+            moyTamponMoy += moyMoy;
+            compteurMoyGrave++;
+            moyMoy = (moyTamponMoy) / compteurMoyGrave;
+
+            for (int i = 200; i < 2000; i++)
+            {
+                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100)
+                {
+                    initBool();
+                    return Son.getPuissance(i);
+                }
+            }
+            return 0;
+        }
+
+
+        //partie aigue
+        public static double checkAigue()
+        {
+            moyAigue = moyennePuissance(2000, 8000);
+            moyTamponAigue += moyAigue;
+            compteurMoyAigue++;
+            moyAigue = (moyTamponAigue) / compteurMoyAigue;
+
+            for (int i = 0; i < 200; i++)
+            {
+                if (Son.getPuissance(i) > 2 * moyAigue && Son.getPuissance(i) > 100)
+                {
+                    initBool();
+                    return Son.getPuissance(i);
+                }
+            }
+            return 0;
+        }
+
+
+        public static void GererImage(GestionImage gestionImage)
+        {
+            double valGravcheckGrave = checkGrave();
+            double valGravcheckMoy = checkMoy();
+            double valGravcheckAigue = checkAigue();
+            compteur++;
+            if(compteur > 10) {
+                compteur = 0;
+                initBool();
+            }
+            Bpm = Son.getBpm();
+            if (valGravcheckGrave != 0)
+            {
+                if(valGravcheckAigue < 10)
+                {
+                    flop = true;
+                    Console.WriteLine("flop");
+                } else if (valGravcheckGrave > 10 && valGravcheckGrave <= 100)
+                {
+                    rotate = true;
+                    Console.WriteLine("rotate");
+                } else if (valGravcheckGrave > 100 && valGravcheckGrave <= 200) {
+                    flip = true;
+                    Console.WriteLine("flip");
+                }
+            } else if (valGravcheckMoy != 0)
+            {
+                if (valGravcheckMoy > 200 && valGravcheckMoy <= 300)
+                {
+                    lumino = true;
+                    Console.WriteLine("lumino");
+                }
+                else if (valGravcheckMoy > 300 && valGravcheckMoy <= 500)
+                {
+                    rotate = true;
+                    Console.WriteLine("rotate");
+                }
+                else if (valGravcheckMoy > 500 && valGravcheckMoy <= 700)
+                {
+                    polar = true;
+                    Console.WriteLine("polar");
+                }
+                else if (valGravcheckMoy > 700 && valGravcheckMoy <= 1000)
+                {
+                    arc = true;
+                    Console.WriteLine("arc");
+                }
+                else if (valGravcheckMoy > 1000 && valGravcheckMoy <= 1500)
+                {
+                    flou = true;
+                    Console.WriteLine("flou");
+                }
+                else if (valGravcheckMoy > 1500 && valGravcheckMoy <= 2000)
+                {
+                    contrast = true;
+                    Console.WriteLine("contrast");
+                }
+
+            } else if (valGravcheckAigue != 0)
+            {
+
+            } else
+            {
+                //initBool();
+            }
+
 
             if (flip)
             {
-                outilsImage.modifierImage("flip");
+                gestionImage.modifierImage("flip");
             }else if (flop)
             {
-                outilsImage.modifierImage("flop");
+                gestionImage.modifierImage("flop");
             }
             else if (negate)
             {
-                outilsImage.modifierImage("negate");
+                gestionImage.modifierImage("negate");
             }
             else if (gris)
             {
-                outilsImage.modifierImage("gris");
+                gestionImage.modifierImage("gris");
             }
             else if (flou)
             {
-                outilsImage.modifierImage("flou");
+                gestionImage.modifierImage("flou");
             }
             else if (polar)
             {
-                outilsImage.modifierImage("flop");
+                gestionImage.modifierImage("polar");
             }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else if (differe)
             {
-                outilsImage.modifierImage("differe");
+                gestionImage.modifierImage("differe");
             }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else if (lumino)
             {
-                outilsImage.modifierImage("lumino");
+                gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy));
             }
             else if (contrast)
             {
-                outilsImage.modifierImage("contrast");
+                gestionImage.modifierImage("contrast", (int)(valGravcheckMoy / moyMoy) / 2);
             }
             else if (arc)
             {
-                outilsImage.modifierImage("arc");
+                gestionImage.modifierImage("arc", 1);
             }
             else if (rotate)
             {
-                outilsImage.modifierImage("rotate");
+                gestionImage.modifierImage("rotate", (int)(valGravcheckGrave / moyGrave));
             }
             else if (edge)
             {
-                outilsImage.modifierImage("edge");
+                gestionImage.modifierImage("edge", (int)(valGravcheckMoy / moyMoy));
             }
             else if (coul)
             {
-                outilsImage.modifierImage("coul");
+                gestionImage.modifierImage("coul", new MagickColor(200,200,200), new MagickColor(100,45,59));
             }
             else if (cut)
             {
-                outilsImage.modifierImage("cut");
+                gestionImage.modifierImage("cut");
             }
         }
     }

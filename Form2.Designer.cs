@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.buttonClose = new System.Windows.Forms.PictureBox();
             this.timer_Son = new System.Windows.Forms.Timer(this.components);
-            this.timer_image = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.timer_Basse = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             this.SuspendLayout();
@@ -51,18 +49,15 @@
             this.buttonClose.MouseLeave += new System.EventHandler(this.buttonClose_MouseLeave);
             this.buttonClose.MouseHover += new System.EventHandler(this.buttonClose_MouseHover);
             // 
-            // label1
+            // timer_Son
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(312, 207);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
+            this.timer_Son.Interval = 300;
+            this.timer_Son.Tick += new System.EventHandler(this.timer_Son_Tick);
             // 
             // timer_Basse
             // 
             this.timer_Basse.Enabled = true;
+            this.timer_Basse.Interval = 10;
             this.timer_Basse.Tick += new System.EventHandler(this.timer_Basse_Tick);
             // 
             // Form2
@@ -70,22 +65,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonClose);
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.PictureBox buttonClose;
         private System.Windows.Forms.Timer timer_Son;
-        private System.Windows.Forms.Timer timer_image;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer_Basse;
     }
 }

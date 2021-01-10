@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoundAnimationMaker
+namespace SoundCardECG
 {
     public class ECG
     {
@@ -16,7 +16,7 @@ namespace SoundAnimationMaker
         int STORESECONDS = 5;
         int bufferIndex = 0;
         int buffersCaptured = 0;
-        public int beatThreshold = 7000;
+        public int beatThreshold = 2000;
         public double signalMultiple = 1;
 
         public List<double> beatTimes = new List<double>();
@@ -33,8 +33,6 @@ namespace SoundAnimationMaker
 
         public ECG(int deviceNumber)
         {
-            Console.WriteLine($"Preparing audio device: {deviceNumber}");
-            Console.WriteLine("bufferValue :" + beatThreshold);
             wvin = new NAudio.Wave.WaveInEvent();
             wvin.DeviceNumber = deviceNumber;
             wvin.WaveFormat = new NAudio.Wave.WaveFormat(SAMPLERATE, BITRATE, CHANNELS);
@@ -45,83 +43,15 @@ namespace SoundAnimationMaker
 
         public void Start()
         {
-            Console.WriteLine($"Starting recording...");
             wvin.StartRecording();
         }
 
         public void Stop()
         {
             wvin.StopRecording();
-            Console.WriteLine($"Recording stopped.");
         }
 
-        public double[] GetFilteredValues()
-        {
-            double[] chrono = new double[values.Length];
-            for (int i = 0; i < lastPointUpdated; i++)
-                chrono[values.Length - lastPointUpdated + i] = values[i];
-            for (int i = lastPointUpdated; i < values.Length; i++)
-                chrono[i - lastPointUpdated] = values[i];
-            chrono = LowPassFilter(chrono);
-            return chrono;
-        }
 
-        private double[] LowPassFilter(double[] pcm, double cutOffFrequency = 500, double sampleRate = 8000)
-        {
-            // it really should be a power of 2
-            int fft_size = pcm.Length;
-            // create a complex data object we will use to shuffle data around
-            MathNet.Numerics.Complex32[] complex = new MathNet.Numerics.Complex32[fft_size];
-
-            // prepare the windowing function
-            int windowSize = 1000;
-            double[] window = new double[pcm.Length];
-            for (int i = 0; i < window.Length; i++)
-            {
-                if (i < windowSize)
-                {
-                    int distanceFromEdge = i;
-                    window[i] = (double)distanceFromEdge / windowSize;
-                }
-                else if (i > window.Length - windowSize)
-                {
-                    int distanceFromEdge = window.Length - i;
-                    window[i] = (double)distanceFromEdge / windowSize;
-                }
-                else
-                {
-                    window[i] = 1;
-                }
-            }
-
-            // load original PCM data into the complex array
-            for (int i = 0; i < fft_size; i++)
-            {
-                float val = (float)(pcm[i] * window[i]);
-                complex[i] = new MathNet.Numerics.Complex32(val, 0);
-            }
-
-            // perform the forward FFT
-            MathNet.Numerics.IntegralTransforms.Fourier.Forward(complex);
-
-            // blank-out the high frequency stuff
-            for (int i = 0; i < fft_size / 2; i++)
-            {
-                double freq = (double)(i * sampleRate * 2) / fft_size;
-                if (i == fft_size / 2 - 1) System.Console.WriteLine(freq);
-                if (freq < cutOffFrequency) continue;
-                complex[i] = new MathNet.Numerics.Complex32(0, 0);
-                complex[fft_size - i - 1] = new MathNet.Numerics.Complex32(0, 0);
-            }
-
-            // perform the inverse FFT
-            MathNet.Numerics.IntegralTransforms.Fourier.Inverse(complex);
-
-            // extract the real component into the original PCM array and return it
-            for (int i = 0; i < fft_size; i++) pcm[i] = complex[i].Real;
-
-            return pcm;
-        }
 
         private void BeatDetected(double timeSec)
         {
@@ -139,8 +69,6 @@ namespace SoundAnimationMaker
             // fix the first heartbeat which lacks a BPM
             if (beatRates.Count > 0 && beatRates[0] == 0)
                 beatRates[0] = beatRate;
-
-            Console.WriteLine($"BEAT at {timeSec} sec ({Math.Round(beatRate, 1)} BPM)");
         }
 
         public int lastPointUpdated = 0;
@@ -155,17 +83,12 @@ namespace SoundAnimationMaker
             for (int i = 0; i < valuesInBuffer; i++)
             {
                 bufferValues[i] = BitConverter.ToInt16(args.Buffer, i * bytesPerValue) * signalMultiple;
-                //Console.WriteLine("bufferValue :" + Math.Abs(bufferValues[i]));
             }
-            //Console.WriteLine("bufferValue :" + Math.Abs(bufferValues[10]));
             double moyennePuiss = 0;
             foreach (var item in bufferValues)
             {
                 moyennePuiss += item;
             }
-            //Console.WriteLine("bufferValue :" + (moyennePuiss / bufferValues.Length));
-
-            //Console.WriteLine("threashold :" + beatThreshold);
             // determine if a heartbeat occured
 
             int j = 0;
@@ -202,14 +125,6 @@ namespace SoundAnimationMaker
             bufferIndex += 1;
             if (bufferIndex * valuesInBuffer > values.Length - 1)
                 bufferIndex = 0;
-        }
-
-        public string GetCSV()
-        {
-            string csv = "beat, time (s), rate (bpm)\n";
-            for (int i = 0; i < beatTimes.Count; i++)
-                csv += $"{i + 1}, {Math.Round(beatTimes[i], 3)}, {Math.Round(beatRates[i], 3)}\n";
-            return csv;
         }
     }
 }
