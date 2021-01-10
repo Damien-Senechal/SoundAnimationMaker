@@ -63,7 +63,7 @@ namespace SoundAnimationMaker
             buttonRescan.Image = rescan;
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void buttonCloseForm1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -124,16 +124,15 @@ namespace SoundAnimationMaker
         private void buttonLancer_Click(object sender, EventArgs e)
         {
             PopupNotifier popup = new PopupNotifier();
-            popup.AnimationDuration = 1000;
-            popup.Size = new Size(200, 100);
+            popup.AnimationDuration = 2000;
+            popup.Size = new Size(250, 150);
             popup.TitleText =  "Attention";
-            popup.ContentText = "Veillez à bien avoir activer votre musique avant de commencer l'exerience :D";
+            popup.ContentText = "Veillez à bien avoir activer votre musique avant de commencer l'experience :D";
             popup.Popup();
 
             Form2 form2 = new Form2(this);
             form2.Show();
             this.Hide();
-            
         }
     }
 }
