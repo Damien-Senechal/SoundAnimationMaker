@@ -28,6 +28,7 @@ namespace SoundAnimationMaker
         public static double moyAigue = 0;
 
         public static int compteur = 0;
+        public static int compteurTransformation = 0;
 
         public static double Bpm = 0;
         public static bool flip, flop, negate, gris, flou, polar, differe, lumino, contrast, arc, rotate, edge, coul, cut;
@@ -125,16 +126,39 @@ namespace SoundAnimationMaker
             return 0;
         }
 
+        public static String getImageRandom()
+        {
+            string[] files = Directory.GetFiles(@"../../Image/banqueImage/", "*.png");
+            Random rd = new Random();
+            int X = rd.Next(files.Length);
+            return files[X];
+        }
 
+        public static bool enCour = false;
+        public static bool transiImageenCour = false;
         public static void GererImage(GestionImage gestionImage)
         {
+            Console.WriteLine(transiImageenCour);
+            if (enCour)
+                return;
+            enCour = true;
+            if (transiImageenCour)
+                return;
+
             double valGravcheckGrave = checkGrave();
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
+            getImageRandom();
             compteur++;
-            if(compteur > 10) {
+            if (compteur > 10) {
                 compteur = 0;
                 initBool();
+            }
+            if (compteurTransformation > 5)
+            {
+                transiImageenCour = true;
+                gestionImage.transitionEntreImage(getImageRandom());
+                compteurTransformation = 0;
             }
             Bpm = Son.getBpm();
             if (valGravcheckGrave != 0)
@@ -195,59 +219,74 @@ namespace SoundAnimationMaker
 
             if (flip)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("flip");
             }else if (flop)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("flop");
             }
             else if (negate)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("negate");
             }
             else if (gris)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("gris");
             }
             else if (flou)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("flou");
             }
             else if (polar)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("polar");
             }
             else if (differe)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("differe");
             }
             else if (lumino)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy));
             }
             else if (contrast)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("contrast", (int)(valGravcheckMoy / moyMoy) / 2);
             }
             else if (arc)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("arc", 1);
             }
             else if (rotate)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("rotate", (int)(valGravcheckGrave / moyGrave));
             }
             else if (edge)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("edge", (int)(valGravcheckMoy / moyMoy));
             }
             else if (coul)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("coul", new MagickColor(200,200,200), new MagickColor(100,45,59));
             }
             else if (cut)
             {
+                compteurTransformation++;
                 gestionImage.modifierImage("cut");
             }
+            enCour = false;
         }
     }
 }

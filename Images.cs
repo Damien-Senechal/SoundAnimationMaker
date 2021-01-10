@@ -197,17 +197,16 @@ namespace SoundAnimationMaker
             image.Extent(witdh, height);
         }
 
-
-        public MagickImageCollection transitionEntreImage(Images image2)
+        public MagickImageCollection transitionEntreImages(Images image2)
         {
             MagickImageCollection collection = new MagickImageCollection();
             collection.Add(image);
             collection.Add(image2.image);
-            collection.Morph(20);
+            collection.Morph(10);
             return collection;
         }
 
-        public MagickImageCollection transitionEntreImage(Images image2, int nbimage)
+        public MagickImageCollection transitionEntreImages(Images image2, int nbimage)
         {
             MagickImageCollection collection = new MagickImageCollection();
             collection.Add(image);

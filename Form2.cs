@@ -13,12 +13,10 @@ namespace SoundAnimationMaker
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
         private static PictureBox fondForm2 = new PictureBox();
-        private int nbDevices = 0; 
         public Form2(Form1 frm)
         {
             InitializeComponent();
             frmParent = frm;
-            nbDevices = frm.combox.Items.Count;
             Image imageDeFondForm2 = frm.pictureBox1.Image;
             fondForm2.Image = imageDeFondForm2;
             fondForm2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -39,6 +37,7 @@ namespace SoundAnimationMaker
         {
             Son.StartListening(frmParent.combox);
             Son.AudioMonitorInitialize(frmParent.combox.SelectedIndex);
+            GestionImage.supprimeVieilleImage();
         }
 
         private void buttonClose_Click_1(object sender, EventArgs e)
