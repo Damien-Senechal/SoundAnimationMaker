@@ -78,7 +78,7 @@ namespace SoundAnimationMaker
 
             for (int i = 0; i < 200; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyMoy) {
+                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100) {
                     initBool();
                     return Son.getPuissance(i);
                 }
@@ -96,7 +96,7 @@ namespace SoundAnimationMaker
 
             for (int i = 200; i < 2000; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyMoy)
+                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100)
                 {
                     initBool();
                     return Son.getPuissance(i);
@@ -116,7 +116,7 @@ namespace SoundAnimationMaker
 
             for (int i = 0; i < 200; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyAigue)
+                if (Son.getPuissance(i) > 2 * moyAigue && Son.getPuissance(i) > 100)
                 {
                     initBool();
                     return Son.getPuissance(i);
@@ -142,37 +142,46 @@ namespace SoundAnimationMaker
                 if(valGravcheckAigue < 10)
                 {
                     flop = true;
+                    Console.WriteLine("flop");
                 } else if (valGravcheckGrave > 10 && valGravcheckGrave <= 100)
                 {
                     rotate = true;
+                    Console.WriteLine("rotate");
                 } else if (valGravcheckGrave > 100 && valGravcheckGrave <= 200) {
                     flip = true;
+                    Console.WriteLine("flip");
                 }
             } else if (valGravcheckMoy != 0)
             {
                 if (valGravcheckMoy > 200 && valGravcheckMoy <= 300)
                 {
-                    flip = true;
+                    lumino = true;
+                    Console.WriteLine("lumino");
                 }
                 else if (valGravcheckMoy > 300 && valGravcheckMoy <= 500)
                 {
                     rotate = true;
+                    Console.WriteLine("rotate");
                 }
                 else if (valGravcheckMoy > 500 && valGravcheckMoy <= 700)
                 {
                     polar = true;
+                    Console.WriteLine("polar");
                 }
                 else if (valGravcheckMoy > 700 && valGravcheckMoy <= 1000)
                 {
                     arc = true;
+                    Console.WriteLine("arc");
                 }
                 else if (valGravcheckMoy > 1000 && valGravcheckMoy <= 1500)
                 {
-                    negate = true;
+                    flou = true;
+                    Console.WriteLine("flou");
                 }
                 else if (valGravcheckMoy > 1500 && valGravcheckMoy <= 2000)
                 {
-                    flip = true;
+                    contrast = true;
+                    Console.WriteLine("contrast");
                 }
 
             } else if (valGravcheckAigue != 0)
@@ -207,19 +216,17 @@ namespace SoundAnimationMaker
             {
                 gestionImage.modifierImage("polar");
             }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else if (differe)
             {
                 gestionImage.modifierImage("differe");
             }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             else if (lumino)
             {
                 gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy));
             }
             else if (contrast)
             {
-                gestionImage.modifierImage("contrast");
+                gestionImage.modifierImage("contrast", (int)(valGravcheckMoy / moyMoy) / 2);
             }
             else if (arc)
             {

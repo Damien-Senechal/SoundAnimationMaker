@@ -114,14 +114,14 @@ namespace SoundAnimationMaker
 
 
         //Partie basse
-        public static void StartListening()
+        public static void StartListening(ComboBox combox)
         {
             // stop the old listener if it's running
             if (ecg != null)
                 ecg.Stop();
 
             // start a new listener
-            ecg = new ECG(0);
+            ecg = new ECG(combox.SelectedIndex);
             ecg.beatThreshold = 2000;
 
             while (ecg.values == null)
@@ -177,37 +177,32 @@ namespace SoundAnimationMaker
             if (ecg.beatTimes != null && ecg.beatTimes.Count > 0)
             {
                 BPMActuel = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
-                Console.WriteLine(BPMActuel);
 
                 if (BPMAncien != BPMActuel)
                 {
                     if (ecg.beatThreshold > thresholdMin)
                     {
-                        Random randNum = new Random();
-                        int X = randNum.Next(16);
+                        /*Random randNum = new Random();
+                        int X = randNum.Next(8);
                         int Xdf = randNum.Next(8);
-                        int Y = randNum.Next(3);
+                        int Y = randNum.Next(3);*/
+
+                        int X = 5;
+                        int Xdf = 5;
+                        int Y = 2;
 
                         pictureBox2.Location = new Point(pictureBox2.Location.X - Xdf, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(10);
-                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(10);
-                        pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(10);
-                        pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(10);
-                        pictureBox2.Location = new Point(pictureBox2.Location.X + Xdf, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(10);
+                        System.Threading.Thread.Sleep(5);
                     }
                     BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
                     mettreAJourThreshol();

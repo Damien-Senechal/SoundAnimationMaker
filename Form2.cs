@@ -37,7 +37,7 @@ namespace SoundAnimationMaker
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            Son.StartListening();
+            Son.StartListening(frmParent.combox);
             Son.AudioMonitorInitialize(frmParent.combox.SelectedIndex);
         }
 
@@ -60,7 +60,12 @@ namespace SoundAnimationMaker
             buttonClose.Image = close;
         }
 
-        private GestionImage gestionGlobale = new GestionImage(fondForm2);
+        private void timer_Basse_Tick(object sender, EventArgs e)
+        {
+            Son.checkBasse(fondForm2);
+        }
+
+        GestionImage gestionGlobale = new GestionImage(fondForm2);
         private void timer_Son_Tick(object sender, EventArgs e)
         {
             Son.UpdatePuissance();
@@ -68,19 +73,8 @@ namespace SoundAnimationMaker
         }
 
         //partie son basse :
-       
-        private void timer_Basse_Tick(object sender, EventArgs e)
-        {
-            Son.checkBasse(fondForm2);
-        }
 
-
-        private void timer_Image_Tick(object sender, EventArgs e)
-        {
-
-            //GestionImage lancement = new GestionImage(pictureBox);
-            //Controleur.GererImage(lancement);
-        }
+        
 
     }
 }

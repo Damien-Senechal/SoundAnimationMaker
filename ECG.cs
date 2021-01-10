@@ -83,17 +83,12 @@ namespace SoundCardECG
             for (int i = 0; i < valuesInBuffer; i++)
             {
                 bufferValues[i] = BitConverter.ToInt16(args.Buffer, i * bytesPerValue) * signalMultiple;
-                //Console.WriteLine("bufferValue :" + Math.Abs(bufferValues[i]));
             }
-            //Console.WriteLine("bufferValue :" + Math.Abs(bufferValues[10]));
             double moyennePuiss = 0;
             foreach (var item in bufferValues)
             {
                 moyennePuiss += item;
             }
-            //Console.WriteLine("bufferValue :" + (moyennePuiss / bufferValues.Length));
-
-            //Console.WriteLine("threashold :" + beatThreshold);
             // determine if a heartbeat occured
 
             int j = 0;
