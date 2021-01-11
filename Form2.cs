@@ -33,7 +33,7 @@ namespace SoundAnimationMaker
             buttonClose.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 135, Screen.PrimaryScreen.Bounds.Height - 35);
             fondForm2.BringToFront();
             this.Controls.Add(fondForm2);
-            this.Controls.Add(pictureGif);
+            fondForm2.Controls.Add(pictureGif);
 
             Form2.pictureGif.BackColor = Color.Transparent;
             Form2.pictureGif.Location = new Point(0, 0);
@@ -132,13 +132,35 @@ namespace SoundAnimationMaker
             }
         }
 
+        public static int nbImage = 1;
         private void timer_gif_Tick(object sender, EventArgs e)
         {
-            
-            FileStream photoStream = File.OpenRead("../../Animation/explosion.gif");
-            Form2.pictureGif.Image = Image.FromStream(photoStream);
-            timer_gif_explosion.Stop();
+            string str = "../../Animation/explosion/missile-" + nbImage + ".png";
+            FileStream photoStream = File.OpenRead(str);
+            pictureGif.Image = Image.FromStream(photoStream);
+            photoStream.Close();
+            nbImage++;
+            if (nbImage > 21)
+            {
+                timer_gif_explosion.Stop();
+                nbImage = 1;
+            }
 
+        }
+
+        public static int nbImage2 = 1;
+        private void timer_gif_pluie_Tick(object sender, EventArgs e)
+        {
+            string str = "../../Animation/pluie/pluieMoyenne-" + nbImage2 + ".png";
+            FileStream photoStream = File.OpenRead(str);
+            pictureGif.Image = Image.FromStream(photoStream);
+            photoStream.Close();
+            nbImage2++;
+            if (nbImage2 == 60)
+            {
+                timer_gif_pluie.Stop();
+                nbImage2 = 1;
+            }
         }
     }
 }

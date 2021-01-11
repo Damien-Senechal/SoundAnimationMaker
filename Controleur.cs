@@ -156,13 +156,15 @@ namespace SoundAnimationMaker
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
 
-            Form2.timer_gif_explosion.Start();
-            //Form2.pictureGif.Hide();
+            Form2.timer_gif_pluie.Start();
 
             if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
             {
                 Form2.timer_gif_explosion.Start();
-                Form2.pictureGif.Hide();
+            }
+            if (valGravcheckAigue != 0)
+            {
+                Form2.timer_gif_pluie.Start();
             }
 
             Bpm = Son.getBpm();
@@ -262,7 +264,7 @@ namespace SoundAnimationMaker
             {
                 Console.WriteLine("lumino");
                 compteurTransformation++;
-                gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy) / 2);
+                gestionImage.modifierImage("lumino", (int)(valGravcheckMoy / moyMoy) / 4);
             }
             else if (contrast)
             {

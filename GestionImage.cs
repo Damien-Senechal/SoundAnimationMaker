@@ -62,6 +62,7 @@ namespace SoundAnimationMaker
         {
             try
             {
+                Thread.Sleep(100);
                 FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
                 pictureBox.Image = Image.FromStream(photoStream);
                 photoStream.Close();
