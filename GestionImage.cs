@@ -45,7 +45,6 @@ namespace SoundAnimationMaker
             try
             {
                 FileStream photoStream = File.OpenRead(cheminComplet);
-                Console.WriteLine("1 :" + cheminComplet);
                 pictureBox.Image = Image.FromStream(photoStream);
                 photoStream.Close();
             }
@@ -64,7 +63,6 @@ namespace SoundAnimationMaker
             try
             {
                 FileStream photoStream = File.OpenRead(accesVersTampon + "imageModifiee" + compteur + ".png");
-                Console.WriteLine("2 :" + accesVersTampon + "imageModifiee" + compteur + ".png");
                 pictureBox.Image = Image.FromStream(photoStream);
                 photoStream.Close();
             }
@@ -133,7 +131,6 @@ namespace SoundAnimationMaker
             MagickImageCollection collection = img.transitionEntreImages(img2);
             collection.Write(accesVersTampon + "imageModifiee" + (compteur + 1) + ".png");
             Console.WriteLine("transitions");
-            Thread.Sleep(800);
 
             Form2.timer_affichage.Start();
         }

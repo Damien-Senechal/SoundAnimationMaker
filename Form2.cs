@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace SoundAnimationMaker
         private Image closePushed = Image.FromFile("Ressources/closePushed.png");
         private Image close = Image.FromFile("Ressources/close.png");
         private Form1 frmParent;
+        public static PictureBox pictureGif = new PictureBox();
         private static PictureBox fondForm2 = new PictureBox();
         public Form2(Form1 frm)
         {
@@ -31,6 +33,12 @@ namespace SoundAnimationMaker
             buttonClose.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 135, Screen.PrimaryScreen.Bounds.Height - 35);
             fondForm2.BringToFront();
             this.Controls.Add(fondForm2);
+            this.Controls.Add(pictureGif);
+
+            Form2.pictureGif.BackColor = Color.Transparent;
+            Form2.pictureGif.Location = new Point(0, 0);
+            Form2.pictureGif.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Form2.pictureGif.BringToFront();
 
             timer_Son.Start();
         }
@@ -116,13 +124,21 @@ namespace SoundAnimationMaker
                     gestionGlobale.afficheImage(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png");
                     File.Move(GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + "-" + i + ".png", GestionImage.accesVersTampon + "imageModifiee" + (GestionImage.compteur + 1) + ".png");
                     GestionImage.compteur++;
-                    Thread.Sleep(100);
                     i = 0;
                     Controleur.transiImageenCour = false;
                     Controleur.enCour = false;
                     timer_affichage.Stop();
                 }
             }
+        }
+
+        private void timer_gif_Tick(object sender, EventArgs e)
+        {
+            
+            FileStream photoStream = File.OpenRead("../../Animation/explosion.gif");
+            Form2.pictureGif.Image = Image.FromStream(photoStream);
+            timer_gif_explosion.Stop();
+
         }
     }
 }

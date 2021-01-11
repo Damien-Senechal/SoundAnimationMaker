@@ -128,17 +128,6 @@ namespace SoundAnimationMaker
             return files[X];
         }
 
-        public static void afficherGif(String cheminGif)
-        {
-            PictureBox PictureGif = new PictureBox();
-            PictureGif.BackColor = System.Drawing.Color.Transparent;
-            PictureGif.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2);
-            PictureGif.Name = "pictureGif";
-            PictureGif.Size = new System.Drawing.Size(500, 500);
-            FileStream photoStream = File.OpenRead(cheminGif);
-            PictureGif.Image = Image.FromStream(photoStream);
-            photoStream.Close();
-        }
 
         public static bool enCour = false;
         public static bool transiImageenCour = false;
@@ -166,11 +155,14 @@ namespace SoundAnimationMaker
             double valGravcheckGrave = checkGrave();
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
-            afficherGif("../../Animation/explosion.gif");
+
+            Form2.timer_gif_explosion.Start();
+            //Form2.pictureGif.Hide();
 
             if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
             {
-                afficherGif("../../Animation/explosion.gif");
+                Form2.timer_gif_explosion.Start();
+                Form2.pictureGif.Hide();
             }
 
             Bpm = Son.getBpm();
@@ -294,7 +286,7 @@ namespace SoundAnimationMaker
             {
                 Console.WriteLine("edge");
                 compteurTransformation++;
-                gestionImage.modifierImage("edge", (int)(valGravcheckMoy / moyMoy));
+                gestionImage.modifierImage("edge", (int)(valGravcheckMoy / moyMoy) /2);
             }
             else if (coul)
             {

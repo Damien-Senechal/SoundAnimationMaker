@@ -33,7 +33,8 @@
             this.buttonClose = new System.Windows.Forms.PictureBox();
             this.timer_Son = new System.Windows.Forms.Timer(this.components);
             this.timer_Basse = new System.Windows.Forms.Timer(this.components);
-            this.timer_affichage = new System.Windows.Forms.Timer(this.components);
+            timer_affichage = new System.Windows.Forms.Timer(this.components);
+            timer_gif_explosion = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,12 @@
             // 
             // timer_affichage
             // 
-            this.timer_affichage.Tick += new System.EventHandler(this.timer_affichage_Tick);
+            timer_affichage.Tick += new System.EventHandler(this.timer_affichage_Tick);
+            // 
+            // timer_gif_explosion
+            // 
+            timer_gif_explosion.Interval = 2100;
+            timer_gif_explosion.Tick += new System.EventHandler(this.timer_gif_Tick);
             // 
             // Form2
             // 
@@ -83,6 +89,7 @@
         private System.Windows.Forms.PictureBox buttonClose;
         private System.Windows.Forms.Timer timer_Basse;
         public System.Windows.Forms.Timer timer_Son;
-        public System.Windows.Forms.Timer timer_affichage;
+        public static System.Windows.Forms.Timer timer_gif_explosion;
+        public static System.Windows.Forms.Timer timer_affichage;
     }
 }
