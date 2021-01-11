@@ -183,35 +183,31 @@ namespace SoundAnimationMaker
                 {
                     if (ecg.beatThreshold > thresholdMin)
                     {
-                        /*Random randNum = new Random();
-                        int X = randNum.Next(8);
-                        int Xdf = randNum.Next(8);
-                        int r = randNum.Next(3);*/
 
                         int X = 5;
                         int Xdf = 5;
                         int Y = 2;
 
                         pictureBox2.Location = new Point(pictureBox2.Location.X - Xdf, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X - X, pictureBox2.Location.Y - Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
                         pictureBox2.Location = new Point(pictureBox2.Location.X + X, pictureBox2.Location.Y + Y);
-                        System.Threading.Thread.Sleep(5);
+                        Thread.Sleep(5);
 
                         if (boolTurn)
                         {
-                            gi.modifierImage("rotate", 2);
+                            gi.modifierImage("rotate", 3);
                             boolTurn = false;
                         } else
                         {
-                            gi.modifierImage("rotate", -2);
+                            gi.modifierImage("rotate", -3);
                             boolTurn = true;
                         }
                             
@@ -219,7 +215,6 @@ namespace SoundAnimationMaker
                     BPMAncien = string.Format("{0:0.0} BPM", ecg.beatRates[ecg.beatRates.Count - 1]);
                     mettreAJourThreshol();
                     stopWatch.Restart();
-
 
                 }
                 

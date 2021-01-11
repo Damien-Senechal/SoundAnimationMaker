@@ -156,8 +156,6 @@ namespace SoundAnimationMaker
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
 
-            Form2.timer_gif_pluie.Start();
-
             if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
             {
                 Form2.timer_gif_explosion.Start();
@@ -294,7 +292,7 @@ namespace SoundAnimationMaker
             {
                 Console.WriteLine("coul");
                 compteurTransformation++;
-                gestionImage.modifierImage("coul", new MagickColor((ushort)randNum.Next(255), (ushort)randNum.Next(255), (ushort)randNum.Next(255)), new MagickColor(100, 45, 59));
+                gestionImage.modifierImage("coul", new MagickColor((ushort)randNum.Next(255), (ushort)randNum.Next(255), (ushort)randNum.Next(255)), new MagickColor((ushort)randNum.Next(255), (ushort)randNum.Next(255), (ushort)randNum.Next(255)));
             }
             else if (cut)
             {
