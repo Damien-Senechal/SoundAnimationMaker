@@ -76,7 +76,7 @@ namespace SoundAnimationMaker
 
             for (int i = 0; i < 200; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100) {
+                if (Son.getPuissance(i) > 3 * moyMoy && Son.getPuissance(i) > 100) {
                     initBool();
                     return Son.getPuissance(i);
                 }
@@ -93,7 +93,7 @@ namespace SoundAnimationMaker
 
             for (int i = 200; i < 2000; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyMoy && Son.getPuissance(i) > 100)
+                if (Son.getPuissance(i) > 3 * moyMoy && Son.getPuissance(i) > 100)
                 {
                     initBool();
                     return Son.getPuissance(i);
@@ -111,7 +111,7 @@ namespace SoundAnimationMaker
 
             for (int i = 0; i < 200; i++)
             {
-                if (Son.getPuissance(i) > 2 * moyAigue && Son.getPuissance(i) > 100)
+                if (Son.getPuissance(i) > 3 * moyAigue && Son.getPuissance(i) > 100)
                 {
                     initBool();
                     return Son.getPuissance(i);
@@ -156,14 +156,14 @@ namespace SoundAnimationMaker
             double valGravcheckMoy = checkMoy();
             double valGravcheckAigue = checkAigue();
 
-            if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
+           /* if (valGravcheckAigue != 0 && valGravcheckMoy != 0)
             {
                 Form2.timer_gif_explosion.Start();
-            }
-            if (valGravcheckAigue != 0)
+            }*/
+            /*if (valGravcheckAigue != 0)
             {
                 Form2.timer_gif_pluie.Start();
-            }
+            }*/
 
             Bpm = Son.getBpm();
             if (valGravcheckGrave != 0)
@@ -300,6 +300,10 @@ namespace SoundAnimationMaker
                 compteurTransformation++;
                 gestionImage.modifierImage("cut");
             }
+
+            valGravcheckGrave = 0;
+            valGravcheckMoy = 0;
+            valGravcheckAigue = 0;
             enCour = false;
         }
     }

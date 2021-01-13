@@ -151,6 +151,7 @@ namespace SoundAnimationMaker
         public static int nbImage2 = 1;
         private void timer_gif_pluie_Tick(object sender, EventArgs e)
         {
+            pictureGif.Show();
             string str = "../../Animation/pluie/pluieMoyenne-" + nbImage2 + ".png";
             FileStream photoStream = File.OpenRead(str);
             pictureGif.Image = Image.FromStream(photoStream);
@@ -159,6 +160,7 @@ namespace SoundAnimationMaker
             if (nbImage2 == 60)
             {
                 timer_gif_pluie.Stop();
+                pictureGif.Hide();
                 nbImage2 = 1;
             }
         }
